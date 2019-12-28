@@ -1,0 +1,29 @@
+{
+  "manifest_version": 1,
+  "name": "MdPriview",
+  "version": "1.0.0",
+  "description": "预览本地 markdown文件",
+  "content_scripts": [
+    {
+      "matches": [
+        "file:///*.md"
+      ],
+      "js": [
+        "js/index.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "img/16.png",
+    "48": "img/48.png",
+    "128": "img/128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/16.png",
+      "38": "img/48.png"
+    },
+    "default_title": "MdPriview"
+  }
+}
