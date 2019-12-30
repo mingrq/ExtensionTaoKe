@@ -13,11 +13,11 @@
         "css/content.css"
       ],
       "js": [
-        "js/jcz_qcc_axios.js",
-        "js/jcz_qcc_jquery.js",
-        "js/jcz_qcc_jquery.liMarquee.js",
-        "js/jcz_qcc_vue.js",
-        "js/jcz_qcc_aes.js",
+        "js/bangke_axios.js",
+        "js/bangke_jquery.js",
+        "js/bangke_jquery.liMarquee.js",
+        "js/bangke_vue.js",
+        "js/bangke_aes.js",
         "js/jcz_qcc_pagination.js",
         "js/jcz_qcc_mode-ecb.js",
         "js/jcz_qcc_changesoldlist.js"
@@ -31,9 +31,9 @@
   },
   "background": {
     "scripts": [
-      "js/jcz_qcc_jquery.js",
-      "js/jcz_qcc_axios.js",
-      "js/jcz_qcc_aes.js",
+      "js/bangke_jquery.js",
+      "js/bangke_axios.js",
+      "js/bangke_aes.js",
       "js/jcz_qcc_mode-ecb.js",
       "js/background.js"
     ]
