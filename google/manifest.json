@@ -1,29 +1,70 @@
 {
+  "name": "邦客",
+  "description": "这是一款为淘宝掌柜开发的可疑订单识别插件",
+  "version": "1.0",
   "manifest_version": 1,
-  "name": "MdPriview",
-  "version": "1.0.0",
-  "description": "预览本地 markdown文件",
   "content_scripts": [
     {
       "matches": [
-        "file:///*.md"
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/content.css"
       ],
       "js": [
-        "js/index.js"
+        "js/jcz_qcc_axios.js",
+        "js/jcz_qcc_jquery.js",
+        "js/jcz_qcc_jquery.liMarquee.js",
+        "js/jcz_qcc_vue.js",
+        "js/jcz_qcc_aes.js",
+        "js/jcz_qcc_pagination.js",
+        "js/jcz_qcc_mode-ecb.js",
+        "js/jcz_qcc_changesoldlist.js"
       ],
-      "run_at": "document_end"
+      "run_at": "document_end",
+      "all_frames": true
     }
   ],
-  "icons": {
-    "16": "img/16.png",
-    "48": "img/48.png",
-    "128": "img/128.png"
-  },
   "browser_action": {
-    "default_icon": {
-      "19": "img/16.png",
-      "38": "img/48.png"
-    },
-    "default_title": "MdPriview"
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/jcz_qcc_jquery.js",
+      "js/jcz_qcc_axios.js",
+      "js/jcz_qcc_aes.js",
+      "js/jcz_qcc_mode-ecb.js",
+      "js/background.js"
+    ]
+  },
+  "permissions": [
+    "contextMenus",
+    "cookies",
+    "proxy",
+    "webRequest",
+    "webRequestBlocking",
+    "browsingData",
+    "unlimitedStorage",
+    "notifications",
+    "storage",
+    "tabs",
+    "activeTab",
+    "http://*/*",
+    "https://*/*",
+    "*://*/*",
+    "<all_urls>"
+  ],
+
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' ;",
+  "web_accessible_resources": [
+    "img/*",
+    "css/*",
+    "js/*"
+  ],
+  "icons": {
+    "128": "img/bangke_logo_128.png",
+    "48": "img/bangke_logo_48.png",
+    "16": "img/bangke_logo_16.png"
   }
 }
