@@ -1,0 +1,79 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="css/index.css"/>
+    <style>
+        .qq {
+            font-size: 12px;
+            font-family: MicrosoftYaHei;
+            font-weight: 400;
+            color: #4E3EED;
+        }
+    </style>
+</head>
+<body style="background-color: #f2f2f2;">
+
+<div class="vue_demo" style="width: 426px">
+    <div style="margin: 15px;display: flex;flex-direction: row">
+        <img :src="logo" alt="亲查查" style="height: 38px;width: 167px;">
+        <div style="flex: 1;"></div>
+        <div style="display:flex;flex-direction: column;height:35px;">
+            <span style="flex: 1"></span>
+            <span class="qq">商家QQ群：{{qq}}</span>
+        </div>
+    </div>
+    <div class="qcc_vue_list" style="padding-left: 15px;padding-right: 15px;height:40px;
+    background:rgba(248,248,248,1);border:1px solid rgba(230,230,230,1)">
+        <ul style="margin-left: 8px">
+        </ul>
+    </div>
+    <div style="margin:10px 15px;background:rgba(248,248,248,1);display: flex;flex-direction: row;">
+        <div style="flex: 1;height: 37px;border-radius: 4px;background:rgba(255,255,255,1);
+                    border:1px solid rgba(230,230,230,1);line-height: 37px;
+                    text-align: center;cursor: pointer">
+            <a :href="queryOrder" target="_blank"
+               style="text-decoration:none;out-line: none;color: #333;font-size: 12px;">
+                查询本店订单
+            </a>
+        </div>
+        <div style="flex: 1;height: 37px;border-radius: 4px;background:rgba(255,255,255,1);
+                    border:1px solid rgba(230,230,230,1);line-height: 37px;
+                    text-align: center;margin-left: 10px;cursor: pointer">
+            <a :href="queryWangWang" target="_blank"
+               style="text-decoration:none;out-line: none;color: #333;font-size: 12px;">
+                去官网查旺旺
+            </a>
+        </div>
+    </div>
+
+    <!--用户信息-->
+    <div class="customer_div" v-if="customer" style="display: flex;flex-direction: row;
+    align-items: center;justify-content: center;padding: 12px">
+        <img src="https://www.huopengpeng.com/app/public/assets/plug/username.png"
+             style="width: 12px;height: 12px;margin-right: 6px;margin-left: 12px"
+        >
+        <div style="font-size:12px;color:rgba(51,51,51,1);margin-right: 18px">{{customer.phone}}</div>
+
+        <span style="font-size:12px;line-height:16px;color:rgba(0,144,255,1);cursor: pointer;"
+              @click="logout()">退出登录</span>
+
+        <div style="flex: 1"></div>
+
+        <img src="https://www.huopengpeng.com/app/public/assets/plug/qb_coin.png"
+             style="width: 12px;height: 12px;margin-right: 6px;"
+        >
+        <span style="font-size:12px;color:rgba(51,51,51,1);">亲币</span>
+        <span style="ont-size:12px;color:rgba(255,167,78,1);margin-right: 20px;margin-left: 5px">{{customer.coin}}</span>
+        <a href="https://www.huopengpeng.com/home/customer/v/info?type=1" target="_blank"
+           style="font-size:12px;color:rgba(0,144,255,1);">获取亲币</a>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/bangke_jquery.js"></script>
+<script type="text/javascript" src="js/bangke_vue.js"></script>
+<script type="text/javascript" src="js/bangke_url_m.js"></script>
+<script type="text/javascript" src="js/bangke_popup.js?v=1.12"></script>
+<script>
+    console.log(url_initData);
+</script>
+</html>

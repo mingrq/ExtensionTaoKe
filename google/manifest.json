@@ -2,7 +2,7 @@
   "name": "邦客",
   "description": "这是一款为淘宝掌柜开发的可疑订单识别插件",
   "version": "1.0",
-  "manifest_version": 1,
+  "manifest_version": 2,
   "content_scripts": [
     {
       "matches": [
@@ -27,7 +27,7 @@
     }
   ],
   "browser_action": {
-    "default_popup": "popup.html"
+    "default_popup": "html/popup.html"
   },
   "background": {
     "scripts": [
