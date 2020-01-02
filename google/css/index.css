@@ -1,0 +1,565 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: '微软雅黑';
+    overflow: hidden;
+}
+
+input, button, select, textarea {
+    outline: none
+}
+
+textarea {
+    resize: none
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.popup {
+    background-color: #fbfbfb;
+    width: 450px;
+    position: relative;
+    height: 650px;
+    overflow-y: auto;
+}
+
+.loading {
+    width: 200px;
+    position: absolute;
+    text-align: center;
+    vertical-align: middle;
+    height: 40px;
+    top: 40%;
+    left: 31%;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    text-align: center;
+    display: none;
+    overflow-y: auto;
+}
+
+.header {
+    position: relative;
+    vertical-align: middle;
+    border-bottom: 1px solid #c0c0c0;
+    padding-bottom: 10px;
+    margin: 10px 10px 0px;
+}
+
+.icon_describ {
+    vertical-align: middle;
+}
+
+.icon_describ_left {
+    display: table-cell;
+    vertical-align: middle;
+    float: left;
+    width: 25%;
+}
+
+.icon_describ_left .icon {
+    height: 23px;
+    float: left;
+    margin-right: 6px;
+}
+
+.login_state {
+    width: 15%;
+    cursor: pointer;
+    float: left;
+    color: #ff6537;
+    font-size: 14px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.login_state:hover {
+    color: #FF5A30;
+}
+
+.text_span {
+    float: left;
+    width: 30%;
+    vertical-align: middle;
+    text-align: center;
+    color: #111111;
+    font-size: 14px;
+    font-family: "Microsoft Sans Serif";
+}
+
+.total_num {
+    color: #ff6537;
+    font-size: 14px;
+    font-family: "Microsoft Sans Serif";
+}
+
+.total_new_add {
+    color: #ff6537;
+    font-size: 14px;
+    font-family: "Microsoft Sans Serif";
+}
+
+.main_data {
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 40px;
+}
+
+.main_table {
+    table-layout: fixed;
+    width: 100%;
+    border-right: 1px solid #c0c0c0;
+    border-bottom: 1px solid #c0c0c0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.main_table_title {
+    height: 40px;
+    font-size: 14px;
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+    border-left: 1px solid #c0c0c0;
+    border-top: 1px solid #c0c0c0;
+    color: #111111;
+    vertical-align: middle;
+}
+
+.main_table_image {
+    margin-right: 6px;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.main_table_td_wangwang {
+    height: 34px;
+    font-size: 12px;
+    line-height: 34px;
+    padding: 0px;
+    margin: 0px;
+    color: #666;
+    text-align: center;
+    border-left: 1px solid #c0c0c0;
+    background-color: #ffffff;
+    border-top: 1px solid #c0c0c0;
+}
+
+.main_table_td {
+    height: 34px;
+    font-size: 12px;
+    line-height: 34px;
+    padding: 0px;
+    margin: 0px;
+    color: #666;
+    text-align: center;
+    border-left: 1px solid #c0c0c0;
+    border-top: 1px solid #c0c0c0;
+    background-color: #ffffff;
+}
+
+.main_table_td_click {
+    height: 34px;
+    font-size: 12px;
+    line-height: 34px;
+    padding: 0px;
+    margin: 0px;
+    color: #666;
+    background-color: #cccccc;
+    text-align: center;
+    border-left: 1px solid #c0c0c0;
+    border-top: 1px solid #c0c0c0;
+}
+
+._pointer {
+    cursor: pointer;
+}
+
+.main_table_td:active {
+    color: #ff6537;
+}
+
+.main_table_td_red {
+    color: #ff6537;
+}
+
+.main_table_td_black {
+    color: #666;
+}
+
+.login_div {
+    position: absolute;
+    width: 170px;
+    height: 176px;
+    color: #666666;
+    /*border: 1px solid #c0c0c0;*/
+    background: url("../img/top_login_bg.png") no-repeat;
+    text-align: center;
+    font-size: 12px;
+    left: 63px;
+    top: 37px;
+    display: none;
+}
+
+.qrcode_image {
+    text-align: center;
+    width: 112px;
+    height: 112px;
+}
+
+.exponent {
+    position: absolute;
+    padding: 6px;
+    text-align: center;
+    opacity: 0.1;
+    display: none;
+    min-height: 250px;
+}
+
+.exponent_list {
+    padding: 6px;
+    background-color: #ffffff;
+    border: 1px solid #c0c0c0;
+}
+
+.exponent_list_up {
+    position: relative;
+    height: 7px;
+    top: 1px;
+    text-align: center;
+    width: 13px;
+    background: url("../img/top_up_sj.png");
+    display: -moz-inline-box;
+    display: inline-block;
+    display: none;
+}
+
+.exponent_list_title {
+    font-size: 12px;
+    color: #aaaaaa;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.exponent_list_table {
+    width: 218px;
+    border-right: 1px solid #c0c0c0;
+    border-bottom: 1px solid #c0c0c0;
+    text-align: center;
+}
+
+.exponent_list_tabletable_title {
+    height: 28px;
+    font-size: 12px;
+    padding: 0px;
+    line-height: 28px;
+    background-color: #fafafa;
+    margin: 0px;
+    text-align: center;
+    border-left: 1px solid #c0c0c0;
+    border-top: 1px solid #c0c0c0;
+    color: #111111;
+    vertical-align: middle;
+}
+
+.exponent_list_table_td {
+    height: 28px;
+    font-size: 12px;
+    padding: 0px;
+    margin: 0px;
+    line-height: 28px;
+    text-align: center;
+    border-left: 1px solid #c0c0c0;
+    border-top: 1px solid #c0c0c0;
+}
+
+.exponent_list_table_span {
+    width: 30px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 3px;
+    border: 1px solid #ff6537;
+    color: #ffffff;
+    background-color: #ff6537;
+    display: -moz-inline-box;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.exponent_list_table_span:active {
+    background-color: #cccccc;
+    border: 1px solid #cccccc;
+}
+
+.exponent_list_table_span_no_click {
+    width: 30px;
+    height: 16px;
+    text-align: center;
+    border-radius: 3px;
+    line-height: 16px;
+    border: 1px solid #cccccc;
+    color: #ffffff;
+    background-color: #cccccc;
+    display: -moz-inline-box;
+    display: inline-block;
+}
+
+.toastMessageSpan {
+    text-align: center;
+    margin: auto;
+    padding: 6px 10px;
+    border: 1px solid black;
+    max-width: 180px;
+    border-radius: 6px;
+    background-color: black;
+}
+
+.message_div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 100px;
+    display: none;
+}
+
+.message {
+    position: relative;
+    opacity: 1;
+    width: 360px;
+    background-color: #ffffff;
+    margin-left: 20px;
+    border: 1px solid #c0c0c0;
+    padding-left: 10px;
+    padding-right: 10px
+}
+
+.message_item_title {
+    margin-top: 6px;
+    float: left;
+}
+
+.message_quit {
+    margin: 6px;
+    padding: 4px;
+    float: right;
+}
+
+.message_edit {
+    padding: 6px;
+    width: 100%;
+    height: 100px;
+    font-size: 12px;
+    border: 1px solid #cccccc;
+    background-color: #fff;
+    overflow: hidden;
+    resize: none;
+}
+
+.message_publish {
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+}
+
+.message_publish_span {
+    float: right;
+    background-color: #ff6537;
+    width: 50px;
+    height: 20px;
+    font-size: 12px;
+    color: #ffffff;
+    line-height: 20px;
+    text-align: center;
+    margin-bottom: 4px;
+    margin-top: 4px;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+
+.message_publish_span:active {
+    background-color: #cccccc;
+}
+
+.message_list {
+}
+
+.message_scroll {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 380px;
+}
+
+.message_list li {
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 6px;
+}
+
+.message_item_icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.message_item_nick_add {
+    width: 36px;
+    height: 18px;
+    line-height: 18px;
+    display: -moz-inline-box;
+    display: inline-block;
+    color: #aaaaaa;
+    border: 1px solid #aaaaaa;
+    border-radius: 3px;
+    font-size: 6px;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.message_item_nick_nomal {
+    width: 36px;
+    height: 18px;
+    line-height: 18px;
+    display: -moz-inline-box;
+    display: inline-block;
+    color: #ffffff;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 6px;
+    text-align: center;
+    background-color: #ff6537;
+}
+
+.message_item_nick_nomal:active {
+    background-color: #cccccc;
+}
+
+.message_item_left {
+    float: left;
+}
+
+.message_item_right {
+    position: relative;
+    margin-top: 6px;
+    margin-left: 36px;
+    padding-left: 6px;
+    text-align: left;
+    color: #666666;
+}
+
+.message_item_content {
+    font-size: 10px;
+}
+
+.message_item_nick {
+    overflow: hidden;
+    font-size: 10px;
+}
+
+.message_item_time {
+    float: left;
+    font-size: 8px;
+    color: #aaaaaa;
+}
+
+.message_item_handle {
+    float: right;
+}
+
+.message_item_priase {
+    width: 12px;
+    height: 12px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.message_item_comnent {
+    width: 12px;
+    height: 12px;
+    margin-right: 14px;
+    cursor: pointer;
+}
+
+.more {
+    color: #3898fc;
+    font-size: 10px;
+    line-height: 20px;
+    cursor: pointer;
+    height: 20px;
+}
+
+.no_data {
+    display: none;
+    border: 1px solid #cccccc;
+    width: 160px;
+    left: 144px;
+    top: 200px;
+    height: 130px;
+    position: absolute;
+    text-align: center;
+}
+
+.message_list_footer {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.message_loading_text {
+    font-size: 10px;
+    color: #aaaaaa;
+}
+
+.popup_notices_div {
+    width: 60%;
+    height: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.popup_notices {
+    overflow: hidden;
+    position: relative;
+}
+
+.popup_notice_span {
+    height: 20px;
+    text-align: left;
+    line-height: 20px;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+a {
+    text-decoration: none
+}
+
+a:hover {
+    text-decoration: underline;
+}
+

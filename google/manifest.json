@@ -20,7 +20,7 @@
         "js/bangke_aes.js",
         "js/jcz_qcc_pagination.js",
         "js/jcz_qcc_mode-ecb.js",
-        "js/jcz_qcc_changesoldlist.js"
+        "js/bangke_changesoldlist.js"
       ],
       "run_at": "document_end",
       "all_frames": true
