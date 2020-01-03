@@ -18,6 +18,7 @@
         "js/bangke_jquery.liMarquee.js",
         "js/bangke_vue.js",
         "js/bangke_aes.js",
+        "js/bangke_url_m.js",
         "js/bangke_pagination.js",
         "js/bangke_mode-ecb.js",
         "js/bangke_changesoldlist.js"

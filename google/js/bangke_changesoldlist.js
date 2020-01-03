@@ -15,7 +15,7 @@ window.onload = function () {
     } else {
         if (jcz_qcc_sold_item_href == jcz_qcc_sold_item_topHref) {
 
-            let baseUrl = 'https://www.qinchacha.com/'; //网络请求测试地址
+            let baseUrl =baseServerUrl; //网络请求测试地址
             // let baseUrl = 'https://lq.vipgz1.idcfengye.com/'; //网络请求测试地址
             // let baseUrl = 'http://192.168.0.111:7001/'; //网络请求测试地址
             let uid = 0;
@@ -46,7 +46,7 @@ window.onload = function () {
                 login: baseUrl + 'plug/index/login',
                 user_info: baseUrl + 'plug/index/info',
                 batch_tbk_info: baseUrl + 'plug/buyer/batch_tbk_info',
-            }
+            };
 
             let loginhtml = `
                 <!--浮出-->
