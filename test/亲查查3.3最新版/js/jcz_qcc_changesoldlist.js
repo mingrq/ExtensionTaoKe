@@ -1,7 +1,7 @@
 window.onload = function () {
     let jcz_qcc_sold_item_href = window.location.href;
     let jcz_qcc_sold_item_topHref = top.location.href;
-    let jcz_qcc_sold_item_isCc = false;//正式 false 测试 true
+    let jcz_qcc_sold_item_isCc = true;//正式 false 测试 true
 //是否正式 如果正式则请求网上的js 否则调试本地
     if (jcz_qcc_sold_item_isCc) {
         //如果请求的页面与浏览器页面相同则执行(防止包含iframe重复请求js)
