@@ -1,6 +1,6 @@
 {
   "name": "邦客",
-  "description": "这是一款为淘宝掌柜开发的可疑订单识别插件",
+  "description": "这是一款可疑订单识别插件",
   "version": "1.0",
   "manifest_version": 2,
   "content_scripts": [
@@ -19,9 +19,9 @@
         "js/bangke_vue.js",
         "js/bangke_aes.js",
         "js/bangke_url_m.js",
-        "js/bangke_pagination.js",
+        "js/bangke_pagination_m.js",
         "js/bangke_mode-ecb.js",
-        "js/bangke_changesoldlist.js"
+        "js/bangke_changesoldlist_m.js"
       ],
       "run_at": "document_end",
       "all_frames": true

@@ -391,7 +391,7 @@ var Pagination = (function() {
       var navigatorName = 'Microsoft Internet Explorer'
       return navigator.appName == navigatorName
     }
-  }
+  };
 
   return obj
-})()
+})();

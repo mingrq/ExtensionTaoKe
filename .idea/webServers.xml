@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="35f77c16-81ba-4e7d-8aa0-9ce6983ed957" name="Apache_xampp" url="http://127.0.0.1">
-        <fileTransfer port="0" accessType="LOCAL" />
+      <webServer id="6682728e-6c34-46af-a2c0-6074ac1da6a2" name="Apache" url="http://localhost:80">
+        <fileTransfer port="0" mountedRoot="D:\phpts\data\wwwroot" accessType="MOUNT" />
       </webServer>
     </option>
   </component>
