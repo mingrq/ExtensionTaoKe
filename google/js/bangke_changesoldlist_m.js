@@ -242,7 +242,7 @@ window.onload = function () {
                 }
                 if (allorder.length > 0 && shopWangWangs.length > 0 && wangwang) {
                     let photourl = sold_list_utils.getServerurl("");
-
+console.log("测试6： "+sold_list_urls.init_list);
                     //拿到外层cell
                     //此类名同一行有两个 取偶数个
                     chrome.extension.sendMessage({
@@ -265,7 +265,7 @@ window.onload = function () {
                                     return;
                                 }
                                 data.data.order_list.map((item) => {
-                                    console.log("是否使用淘客:" + cell.length);
+
                                     for (let i = 0; i < cell.length; i++) {
                                         if (i % 2 != 0) continue;  //
                                         let top = "<style>\n" +
@@ -302,7 +302,7 @@ window.onload = function () {
                                             "            align-items: center;\n" +
                                             "            justify-content: center;\">\n" +
                                             "        <img class=\"jcz_qcc_header_img_qcc\"\n" +
-                                            "             src=\"" + photourl + "logo_qcc.png?v=0.3\" style=\" width: 77px;\n" +
+                                            "             src=\"" + photourl + "bangke_logo.png\" style=\" width: 77px;\n" +
                                             "            height: 22px;\"/>\n" +
                                             "    </div>\n" +
                                             "    <div class=\"jcz_qcc_header_right\" style=\"flex: 1;\n" +
@@ -319,7 +319,7 @@ window.onload = function () {
                                             "            font-size: 12px;\">查信誉\n" +
                                             "            </div>\n" +
                                             "        </div>\n";
-
+                                        console.log("测试：  " + top);
                                         let chaxinyu = "        <!--查淘客-->\n" +
                                             "        <div id='jcz_qcc_nav_div_ctk'  class=\"jcz_qcc_nav_div jcz_qcc_nav_div_ctk\">\n" +
                                             "            <img class=\"jcz_qcc_nav_div_img\"\n" +
@@ -330,6 +330,7 @@ window.onload = function () {
                                             "            font-size: 12px;\">查淘客\n" +
                                             "            </div>\n" +
                                             "        </div>\n";
+                                        console.log("测试1：  " + chaxinyu);
                                         <!--无淘客佣金-->
                                         let wutaoke = "<div id='jcz_qcc_nav_div_wtk' style=\"margin: -15px 0px;\n" +
                                             "            padding: 14px 0px 15px;\n" +
@@ -345,6 +346,7 @@ window.onload = function () {
                                             "            font-size: 12px;\">无淘客佣金\n" +
                                             "            </div>\n" +
                                             "        </div>\n";
+                                        console.log("测试2：  " + wutaoke);
                                         let shiyongtaoke = "        <!--使用了淘客-->\n" +
                                             "        <div id='jcz_qcc_nav_div_sytk' style=\"margin: -15px 0px;\n" +
                                             "            padding: 14px 0px 15px;\n" +
@@ -360,7 +362,7 @@ window.onload = function () {
                                             "            font-size: 12px;\">使用了淘客\n" +
                                             "            </div>\n" +
                                             "        </div>\n";
-
+                                        console.log("测试3：  " + shiyongtaoke);
                                         let end = "    </div>\n" +
                                             "</div>";
                                         let appendhtml = '';
@@ -1254,10 +1256,9 @@ window.onload = function () {
                 wangwang = $(tbsellerwwclass).text();
             }
             //1上传旺旺
-            sold_list_utils.uploadwangwang();
+            //sold_list_utils.uploadwangwang();
             //2插入已卖出列表右边数据
             sold_list_utils.pushList();
-            // sold_list_utils.pushDialog();
             //设置下一页点击事件 重新刷新数据
             sold_list_utils.readClick();
             //插入订单上面的滚动内容和公告

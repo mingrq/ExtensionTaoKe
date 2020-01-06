@@ -411,6 +411,11 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
             break
         case 5:  //执行网络请求 GET
             Tools.doGet(request.url, request.parmas, (ok, data, code) => {
+                console.log("11111111111111111111111111");
+                console.log(ok);
+                console.log(data);
+                console.log(code);
+                console.log("11111111111111111111111111");
                 sendResponse({
                     ok: ok, data: data, code: code
                 });
