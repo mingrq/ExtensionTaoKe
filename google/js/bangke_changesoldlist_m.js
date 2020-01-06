@@ -242,7 +242,6 @@ window.onload = function () {
                 }
                 if (allorder.length > 0 && shopWangWangs.length > 0 && wangwang) {
                     let photourl = sold_list_utils.getServerurl("");
-console.log("测试6： "+sold_list_urls.init_list);
                     //拿到外层cell
                     //此类名同一行有两个 取偶数个
                     chrome.extension.sendMessage({
@@ -261,6 +260,7 @@ console.log("测试6： "+sold_list_urls.init_list);
                                 //插入是否使用淘客
                                 let cell = $(pushitenrightcalss);
 
+                                //ming注释
                                 if (!data.ok) {
                                     return;
                                 }
@@ -1256,7 +1256,7 @@ console.log("测试6： "+sold_list_urls.init_list);
                 wangwang = $(tbsellerwwclass).text();
             }
             //1上传旺旺
-            //sold_list_utils.uploadwangwang();
+            sold_list_utils.uploadwangwang();
             //2插入已卖出列表右边数据
             sold_list_utils.pushList();
             //设置下一页点击事件 重新刷新数据

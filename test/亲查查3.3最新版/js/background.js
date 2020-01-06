@@ -1,7 +1,7 @@
 ﻿console.log('background.js  启动')
 /**
  */
-
+var sppp = 1;
 const prefix = 'jcz_qcc_plug_';
 const types = [
     1,// 获取远程js
@@ -312,6 +312,7 @@ const Tools = {
      * 拼接 get 方式的参数
      * @param params
      */
+
     buildGetParms: function (params) {
         let get = '?';
         if (typeof params == 'object') {
@@ -412,10 +413,12 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
         case 5:  //执行网络请求 GET
             Tools.doGet(request.url, request.parmas, (ok, data, code) => {
                 console.log("11111111111111111111111111");
+                console.log("sppp:"+sppp);
                 console.log(ok);
                 console.log(data);
                 console.log(code);
                 console.log("11111111111111111111111111");
+                sppp++;
                 sendResponse({
                     ok: ok, data: data, code: code
                 });
@@ -423,10 +426,13 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
             return true;
             break
         case 6:  //执行网络请求 POST
-            Tools.doPost(request.url, request.parmas, (ok, data, code) => {
-                sendResponse({
-                    ok: ok, data: data, code: code
-                });
+            // Tools.doPost(request.url, request.parmas, (ok, data, code) => {
+            //     sendResponse({
+            //         ok: ok, data: data, code: code
+            //     });
+            // });
+            sendResponse({
+                ok: true, data: "{stalls_id: 100973, link: \"http://taobao.yukei.cn/\", image_id: 400627, image: \"https://qinchacha.oss-cn-hangzhou.aliyuncs.com/qinChaCha/1571715728825_6.jpg\"}", code: null
             });
             return true;
             break

@@ -410,18 +410,24 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
             token = '';
             break
         case 5:  //执行网络请求 GET
+            //ming注释
             Tools.doGet(request.url, request.parmas, (ok, data, code) => {
                 sendResponse({
                     ok: ok, data: data, code: code
                 });
             });
+
             return true;
             break
         case 6:  //执行网络请求 POST
-            Tools.doPost(request.url, request.parmas, (ok, data, code) => {
-                sendResponse({
-                    ok: ok, data: data, code: code
-                });
+            //ming注释
+            // Tools.doPost(request.url, request.parmas, (ok, data, code) => {
+            //     sendResponse({
+            //         ok: ok, data: data, code: code
+            //     });
+            // });
+            sendResponse({
+                ok: true, data: "{stalls_id: 100973, link: \"http://taobao.yukei.cn/\", image_id: 400627, image: \"https://qinchacha.oss-cn-hangzhou.aliyuncs.com/qinChaCha/1571715728825_6.jpg\"}", code: null
             });
             return true;
             break
