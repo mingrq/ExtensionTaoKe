@@ -299,7 +299,7 @@ window.onload = function () {
                                             "            align-items: center;\n" +
                                             "            justify-content: center;\">\n" +
                                             "        <img class=\"m_header_img_qcc\"\n" +
-                                            "             src=\"" + photourl + "logo_qcc.png?v=0.3\" style=\" width: 77px;\n" +
+                                            "             src=\"" + photourl + "logo.png\" style=\" width: 77px;\n" +
                                             "            height: 22px;\"/>\n" +
                                             "    </div>\n" +
                                             "    <div class=\"m_header_right\" style=\"flex: 1;\n" +
@@ -648,11 +648,11 @@ window.onload = function () {
                                          class="m_scroll_label">
                                         <!--左边-->
                                         <div style="width: 250px;height: 56px;display: flex;flex-direction: row;align-items: center;border-right: solid #E6E6E6 1px;">
-                                            <img src="https://www.huopengpeng.com/app/public/assets/plug/logo_qcc.png"
+                                            <img src="`+baseUrl+`app/public/assets/plug/logo.png"
                                                  style="width:108px;height: 31px;margin-right: 21px;margin-left: 14px">
                                             <div class="m_scroll_seller_help"
                                                  style="display: flex;align-items: center;flex-direction: row;position: relative;cursor: pointer">
-                                                <img src="https://www.huopengpeng.com/app/public/assets/plug/erweima.png"
+                                                <img src="`+baseUrl+`app/public/assets/plug/erweima.png"
                                                      style="width:14px;height: 14px;margin-right: 7px">
                                                 <span style="font-size: 12px;color: #333333">商家互助群</span>
                                                 <!--悬浮二维码-->
@@ -666,7 +666,7 @@ window.onload = function () {
                                         <div style="display: flex;flex: 1;flex-direction: column;justify-content: center; border-right: solid #E6E6E6 1px;">
                                             <div style="display: flex;flex-direction: row;align-items: center;height: 20px;">
                                                 <img class="m_dowebok_notice_icon"
-                                                     src="https://www.huopengpeng.com/app/public/assets/plug/laba.png"
+                                                     src="`+baseUrl+`app/public/assets/plug/laba.png"
                                                      style="padding-left: 13px;height: 15px">
                                                 <div class="m_dowebok_notice"
                                                      style="flex: 1;height: 100%;margin-left: 5px;line-height: 20px;overflow: hidden;">
