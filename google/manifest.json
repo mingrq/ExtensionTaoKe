@@ -13,15 +13,14 @@
         "css/content.css"
       ],
       "js": [
-        "js/bangke_axios.js",
-        "js/bangke_jquery.js",
-        "js/bangke_jquery.liMarquee.js",
-        "js/bangke_vue.js",
-        "js/bangke_aes.js",
-        "js/bangke_url_m.js",
-        "js/bangke_pagination_m.js",
-        "js/bangke_mode-ecb.js",
-        "js/bangke_changesoldlist_m.js"
+        "js/m_axios.js",
+        "js/m_jquery.js",
+        "js/m_jquery.liMarquee.js",
+        "js/m_vue.js",
+        "js/m_aes.js",
+        "js/m_url.js",
+        "js/m_mode-ecb.js",
+        "js/m_changesoldlist.js"
       ],
       "run_at": "document_end",
       "all_frames": true
@@ -32,10 +31,10 @@
   },
   "background": {
     "scripts": [
-      "js/bangke_jquery.js",
-      "js/bangke_axios.js",
-      "js/bangke_aes.js",
-      "js/bangke_mode-ecb.js",
+      "js/m_jquery.js",
+      "js/m_axios.js",
+      "js/m_aes.js",
+      "js/m_mode-ecb.js",
       "js/background.js"
     ]
   },
@@ -64,8 +63,8 @@
     "js/*"
   ],
   "icons": {
-    "128": "img/bangke_logo_128.png",
-    "48": "img/bangke_logo_48.png",
-    "16": "img/bangke_logo_16.png"
+    "128": "img/m_logo_128.png",
+    "48": "img/m_logo_48.png",
+    "16": "img/m_logo_16.png"
   }
 }

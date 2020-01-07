@@ -1,8 +1,7 @@
-﻿console.log('background.js  启动')
-/**
+﻿/**
  */
 
-const prefix = 'jcz_qcc_plug_';
+const prefix = 'm_plug_';
 const types = [
     1,// 获取远程js
     2,// 头部调用页面的旺旺号 或者存储旺旺
@@ -424,13 +423,13 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                 });
             });
             return true;
-            break
+            break;
         case 7://保存查询的旺旺
             localStorage.setItem(prefix + 'search_wangwang', request.search_wangwang);
             localStorage.setItem(prefix + 'showindex', request.showindex);
             localStorage.setItem(prefix + 'order_info', JSON.stringify(request.order_info));
             sendResponse();
-            break
+            break;
         case 8://获取查询的旺旺
             let search_wangwang = localStorage.getItem(prefix + 'search_wangwang') || '';
             let showindex = localStorage.getItem(prefix + 'showindex') || '';
@@ -438,7 +437,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
             sendResponse({
                 search_wangwang: search_wangwang, showindex: showindex, order_info: order_info
             });
-            break
+            break;
         case 9://没有任何参数的网络请求 doHttp(method = 'get', url, param, headers = {}, callback) {
             Tools.doHttp(request.method, request.url, request.parmas, request.headers, (response) => {
                 sendResponse({
@@ -446,7 +445,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                 });
             });
             return true;
-            break
+            break;
     }
 
 });

@@ -7,6 +7,183 @@
     </script>
 </head>
 <body>
+<!--浮出-->
+<div class="jcz_qcc_changesold_list_float">
+    <style>
+        input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0px 1000px white inset;
+        }
+        input, button, select, textarea {
+            outline: none;
+            border-width: 0px;
+        }
+
+        textarea {
+            resize: none;
+            border-width: 0px;
+        }
+
+        .jcz_qcc_changesold_list_float {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            position: fixed;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999999;
+        }
+
+        .jcz_qcc_changesold_float_box {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .jcz_qcc_float_right_one_right_item span {
+            color: #333333;
+            font-size: 14px;
+        }
+
+        .jcz_qcc_float_right_one_right_item h6 {
+            margin-left: 30px;
+            color: #99A2A8;
+            font-size: 14px;
+        }
+        .jcz_qcc_shangesold_showmessagebox{
+            position: absolute;
+            display: none;
+            padding-left: 20px;
+            padding-right: 20px;
+            z-index: 99999999;
+            width: auto;
+            min-width: 130px;
+            height: auto;
+            min-height: 60px;
+            color: #fff;
+            font-size: 14px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            background-color: rgba(0,0,0,0.7);
+            box-shadow:0px 14px 9px rgba(0,0,0,0.16);
+        }
+
+
+    </style>
+
+    <div class="jcz_qcc_changesold_float_box">
+        <!--提示信息弹窗-->
+        <div class="jcz_qcc_shangesold_showmessagebox" >
+        </div>
+        <!--登录-->
+        <div v-show="isshow" id="jcz_qcc_changesold_float_right_login_box" style="width: 436px;height: 315px;background-color: #fff;border-radius: 5px;display: flex;flex-direction: column;z-index: 9999">
+            <div style="padding: 31px">
+                <img style="width: 114px;height: 50px;" :src="getServerurl('right_one_bangke_logo.png')"/>
+                <div style="width: 100%;display: flex;flex-direction: row;align-items: center;height: 40px;margin-top: 26px;border:1px solid #E6E6E6;border-radius: 2px;">
+                    <img :src="getServerurl('username.png')"
+                         style="width: 13px;height: 15px;margin-left: 14px;margin-right: 14px">
+                    <input style="flex: 1 ;color:#333;  -webkit-box-shadow: 0 0 0px 1000px white inset;" v-model="phone" oninput="value=value.replace(/[^\\d]/g,'')"
+                           placeholder="请输入手机号码">
+                </div>
+                <div style="width: 100%;display: flex;flex-direction: row;align-items: center;height: 40px;margin-top: 16px;margin-bottom:16px;border:1px solid #E6E6E6;border-radius: 2px">
+                    <img :src="getServerurl('pwd.png')"
+                         style="width: 13px;height: 15px;margin-left: 14px;margin-right: 14px">
+                    <input type="password" style="flex: 1;color:#333; -webkit-box-shadow: 0 0 0px 1000px white inset;" v-model="pwd"
+                           oninput="if(value.length>18)value=value.slice(0,18)" placeholder="请输入密码">
+                </div>
+                <div @click="login()"
+                     style="width: 100%;height: 40px;border-radius: 2px;background-color: #FF8181;display: flex;align-items: center;justify-content: center;color: #fff;font-size: 14px;ont-weight:bold;cursor: pointer">
+                    登录
+                </div>
+
+                <div style="width: 100%;display: flex;flex-direction: row;align-items: center;margin-top: 20px">
+                    <a :href="baseUrl" style="flex: 1;color: #999999;font-size: 12px;" target="_blank">用户注册</a>
+                    <a :href="baseUrl" styl="color: #999999;font-size: 12px;" target="_blank">找回密码</a>
+                </div>
+            </div>
+        </div>
+        <!--批量查询弹框-->
+        <div v-show="isshow" id="jcz_qcc_changesold_float_plcx_box" style="width: 446px;height: 561px;background-color: #fff;border-radius: 5px;z-index: 9999;display: flex">
+            <div style="padding: 15px;display: flex;flex-direction: column;align-items: center;width: inherit">
+                <div style="display: flex;flex-direction: row;align-items:center;font-size: 16px;color: #333">
+                    <img style="width: 16px;height: 16px;margin-right: 5px" :src="getServerurl('item_logo.png')"/>淘客订单批量查询
+                </div>
+                <span style="font-size: 12px;margin-top: 6px;margin-bottom: 4px; color: #999999">当前页可查询订单{{list.length}}条</span>
+                <!--列表-->
+                <div v-if="list.length >0" style="flex: 1;min-height: 350px;display: flex;flex-direction: column;width: 100%">
+                    <!--标题部分-->
+                    <div style="width: inherit;height: 24px;background-color: #F8F8F8;border:1px solid #E6E6E6;border-bottom-width: 0px; display: flex;flex-direction: row;align-items: center">
+                                        <span style="height: inherit;flex: 1;display: flex;align-items: center;justify-content: center;font-size: 12px;color: #999999;border-right:1px solid #E6E6E6; ">
+                                        下单旺旺
+                                        </span>
+                        <span style="height: inherit;flex: 1;display: flex;align-items: center;justify-content: center;font-size: 12px;color: #999999;border-right:1px solid #E6E6E6; ">
+                                        订单编号
+                                        </span>
+                        <span style="height: inherit;flex: 1;display: flex;align-items: center;justify-content: center;font-size: 12px;color: #999999;">
+                                        淘客查询结果
+                                        </span>
+                    </div>
+                    <!--内容部分-->
+                    <div v-for="(vo,index) in list" :style="index == list.length-1 ? 'border-bottom-width: 1px' : 'border-bottom-width: 0px'" style="width: inherit;height: 24px; border:1px solid #E6E6E6; display: flex;flex-direction: row;align-items: center">
+                        <nobr style="height: inherit;line-height: 22px; flex: 1;font-size: 12px;color: #333333;text-align: center; border-right:1px solid #E6E6E6;text-overflow:ellipsis; white-space: nowrap; display: block; overflow: hidden;">
+                            {{vo.wangwang}}
+                        </nobr>
+                        <nobr style="height: inherit;line-height: 22px; flex: 1;font-size: 12px;text-align: center; color: #333333;border-right:1px solid #E6E6E6;text-overflow:ellipsis; white-space: nowrap; display: block; overflow: hidden;">
+                            {{vo.ordernum}}
+                        </nobr>
+                        <nobr v-if="vo.is_tbk ==-2" style="height: inherit; line-height: 22px;flex: 1;text-align: center; font-size: 12px;color:#333333;text-overflow:ellipsis; white-space: nowrap; display: block; overflow: hidden;">
+                            {{getStarus(vo.is_tbk)}}
+                        </nobr>
+                        <nobr v-if="vo.is_tbk ==-1" style="height: inherit; line-height: 22px;flex: 1;text-align: center; font-size: 12px;color:#333333;text-overflow:ellipsis; white-space: nowrap; display: block; overflow: hidden;">
+                            {{getStarus(vo.is_tbk)}}
+                        </nobr>
+                        <nobr v-if="vo.is_tbk ==0" style="height: inherit;line-height: 22px; flex: 1;text-align: center; font-size: 12px;color:#DDDDDD;text-overflow:ellipsis; white-space: nowrap; display: block; overflow: hidden;">
+                            {{getStarus(vo.is_tbk)}}
+                        </nobr>
+                        <nobr v-if="vo.is_tbk ==1" style="height: inherit;line-height: 22px; flex: 1;text-align: center;font-size: 12px;color:#FF0000;text-overflow:ellipsis; white-space: nowrap; display: block; overflow: hidden;">
+                            {{getStarus(vo.is_tbk)}}
+                        </nobr>
+                    </div>
+                </div>
+                <!--没有数据-->
+                <div v-if="list.length ==0" style="flex: 1;min-height: 350px;display: flex;flex-direction: column;align-items: center;justify-content: center ;width: 100%">
+                                     <span style="font-size: 16px;color: #999999">
+                                       当前页面暂无可查订单
+                                     </span>
+                </div>
+
+                <div style="margin-top: 12px;width: 100%;display: flex;flex-direction: column">
+                                    <span v-if="issearch ==0" @click="startSearch()"  style="width: inherit;height: 40px;display: flex;align-items: center;justify-content: center;background-color:#FF8181; font-size: 14px;color: #fff;font-weight: bold;border-radius: 4px; cursor: pointer">
+                                        开始一键查询
+                                    </span>
+                    <span v-if="issearch ==1" style="width: inherit;height: 40px;display: flex;align-items: center;justify-content: center;background-color:#C5C5C5; font-size: 14px;color: #fff;font-weight: bold;border-radius: 4px;cursor: pointer">
+                                        淘客查询中
+                                    </span>
+                    <div style="margin-top:10px;width: inherit;display: flex;flex-direction: row;align-items: center;font-size: 12px;color: #333">
+                        淘客查询：5亲币/订单
+                        <span style="flex: 1"></span>
+                        <img style="margin-right: 11px;width: 12px;height: 12px;" :src="getServerurl('bkb_logo.png')">
+                        亲币
+                        <span style="margin-left: 25px;font-size: 12px;color: #FFA74E;">{{coin}}</span>
+                        <span @click="czClick()" style="margin-left: 9px;font-size: 12px;color: #0088FF;cursor: pointer">充值</span>
+                        <span @click="refushClcik()" style="margin-left: 9px;font-size: 12px;color: #0088FF;cursor: pointer">刷新</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
