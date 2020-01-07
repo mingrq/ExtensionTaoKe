@@ -2,10 +2,10 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="938ea8bf-a064-4900-9a56-d5026ae92bc1" name="bangke_test" url="http://demo.22com.cn">
+      <webServer id="938ea8bf-a064-4900-9a56-d5026ae92bc1" name="bangke_test" url="https://demo.22com.cn">
         <fileTransfer host="demo.22com.cn" port="21">
           <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" showHiddenFiles="true" />
           </advancedOptions>
           <option name="port" value="21" />
         </fileTransfer>

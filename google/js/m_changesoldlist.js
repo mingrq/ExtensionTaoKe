@@ -26,8 +26,8 @@ window.onload = function () {
         let searchAllclass = "div[class^=simple-pagination-mod__container___]"; //搜索全部class
 
         let sold_list_urls = {
-            upload_wangwang: baseUrl + 'plug/index/upload_wangwang',
-            init_list: baseUrl + 'plug/index/init_list',
+            upload_wangwang: baseUrl + 'plug/index/upload_wangwang.php',
+            init_list: baseUrl + 'plug/index/init_list.php',
             init_notice: baseUrl + 'plug/index/notice',
             login: baseUrl + 'plug/index/login',
             user_info: baseUrl + 'plug/index/info',
@@ -224,6 +224,7 @@ window.onload = function () {
                     $('.m_shangesold_showmessagebox').css('display', 'none');
                 }, 2000)
             },
+
             //修改已卖出列表插入数据
             pushList: function () {
                 //获取所有的订单号
@@ -415,6 +416,7 @@ window.onload = function () {
                     sold_list_utils.exitClick();
                 }
             },
+
             //退出登录按钮
             exitClick: function () {
                 $(tbsellerlogoutclass).unbind().click(function () {
@@ -425,6 +427,7 @@ window.onload = function () {
                     })
                 })
             },
+
             //添加查信誉点击事件
             addListClick: function () {
                 /**
@@ -492,6 +495,7 @@ window.onload = function () {
                     sold_list_utils.openSearchwwDialog(3, wangwang, order_num, create_time, paynum, order_img, order_title);
                 })
             },
+
             //数据刷新点击任务
             readClick: function () {
                 /*搜索订单 跳转指定 */
@@ -553,6 +557,7 @@ window.onload = function () {
                 }
 
             },
+
             //滚动动画
             rollingNotice: function ($dome) {
                 let noticeHeight = $($dome).find('ul').eq(0).find('li').eq(0).height();
@@ -589,6 +594,7 @@ window.onload = function () {
                     })
                 }
             },
+
             //公告滚动
             noticeTime: function ($roll, rollHeight, rollLength) {
                 if (notice == -1) {
@@ -608,6 +614,7 @@ window.onload = function () {
                     }
                 })
             },
+
             //滚动方法
             rollTime: function ($roll, rollHeight, rollLength) {
                 if (roll == -1) {
@@ -755,6 +762,7 @@ window.onload = function () {
                     }
                 );
             },
+
             //插入搜索全部按钮
             pushSearchAll: function () {
                 let imgurl = sold_list_utils.getServerurl('plcx_img.png');
@@ -765,6 +773,7 @@ window.onload = function () {
                     sold_list_utils.searchAllTk();
                 });
             },
+
             //插入登录框
             pushLogin: function () {
                 $('body').append(loginhtml);
@@ -785,6 +794,7 @@ window.onload = function () {
                 }, 200);
 
             },
+
             //初始化登录js
             initLoginJs: function () {
                 changesoldlist_rightlogin = new Vue({
@@ -860,6 +870,7 @@ window.onload = function () {
                     },
                 })
             },
+
             //初始化批量查询js
             initPlch: function () {
                 changesoldlist_plcx = new Vue({
@@ -1061,6 +1072,7 @@ window.onload = function () {
                 })
 
             },
+
             //查询所有淘客
             searchAllTk: function () {
                 chrome.extension.sendMessage({type: 3}, (result) => {
@@ -1073,12 +1085,14 @@ window.onload = function () {
                     sold_list_utils.showPlcx();
                 });
             },
+
             //显示登录框
             showLogin: function () {
                 $('.m_changesold_list_float').css('display', 'flex');
                 changesoldlist_rightlogin.isshow = true;
                 changesoldlist_plcx.isshow = false;
             },
+
             //显示批量查询
             showPlcx: function () {
                 $('.m_changesold_list_float').css('display', 'flex');
@@ -1137,6 +1151,7 @@ window.onload = function () {
                     });
                 }
             },
+
             //获取本地商家用户信息
             getlocalsellerinfo: function () {
                 chrome.extension.sendMessage({type: 3}, function (result) {
@@ -1152,6 +1167,7 @@ window.onload = function () {
                     $(goal).text('')
                 }, 3000)
             },
+
             isNull: function (str) {
                 if (typeof (str) == "undefined") {
                     return true;
@@ -1214,6 +1230,7 @@ window.onload = function () {
                 }
                 return str.indexOf(substr) >= 0;
             },
+
             //网络请求
             Net: function (netprams, response, isshowLoading = false) {
                 chrome.extension.sendMessage(netprams, (data) => {
@@ -1236,7 +1253,8 @@ window.onload = function () {
                     //关闭初始化时的dialog弹窗
                 });
             },
-        }
+        };
+
         // 获取uid token
         chrome.extension.sendMessage({type: 3}, (result) => {
             uid = result.uid;

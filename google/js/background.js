@@ -15,10 +15,10 @@ const types = [
 
 let uid = 0;
 let token = '';
-const isSB = true; //是否加密
+const isSB = false; //是否加密
 const testing = 1; //  0 不显示测试日志， 显示测试日志 1 ,
 
-const sb = 'qinchacha666_666';
+const sb = 'm666_666';
 
 
 const Tools = {
@@ -375,7 +375,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
             sendResponse({
                 wangwang: wangwang
             });
-            break
+            break;
         case 3:  // 页面调用头部获取用户信息
             uid = request.uid || 0;
             token = request.token || "";
@@ -400,14 +400,14 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
             sendResponse({
                 uid: uid, token: token, coin: coin
             });
-            break
+            break;
         case 4:  // 清除 uid token
             localStorage.setItem(prefix + 'uid', '0');
             localStorage.setItem(prefix + 'token', '');
             localStorage.setItem(prefix + 'coin', '');
             uid = 0;
             token = '';
-            break
+            break;
         case 5:  //执行网络请求 GET
             //ming注释
             Tools.doGet(request.url, request.parmas, (ok, data, code) => {
@@ -417,17 +417,15 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
             });
 
             return true;
-            break
+            break;
         case 6:  //执行网络请求 POST
             //ming注释
-            // Tools.doPost(request.url, request.parmas, (ok, data, code) => {
-            //     sendResponse({
-            //         ok: ok, data: data, code: code
-            //     });
-            // });
-            sendResponse({
-                ok: true, data: "{stalls_id: 100973, link: \"http://taobao.yukei.cn/\", image_id: 400627, image: \"https://qinchacha.oss-cn-hangzhou.aliyuncs.com/qinChaCha/1571715728825_6.jpg\"}", code: null
+            Tools.doPost(request.url, request.parmas, (ok, data, code) => {
+                sendResponse({
+                    ok: ok, data: data, code: code
+                });
             });
+
             return true;
             break;
         case 7://保存查询的旺旺

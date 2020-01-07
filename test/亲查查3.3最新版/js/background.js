@@ -75,6 +75,10 @@ const Tools = {
             headers: Tools.getHeader(uid, token),
         }).then((response) => {
             // 隐藏
+            console.log("测试");
+            console.log(url);
+            console.log("测试");
+            console.log(response);
             if (loading) {
                 // _this.loadingHide(vue)
             }
@@ -82,6 +86,7 @@ const Tools = {
             if (isSB) {
                 data = Tools.AESDecrypt(data);
             }
+            console.log(data);
             if (!Tools.is_json(data)) {
                 data = JSON.parse(data);
             }
@@ -156,10 +161,14 @@ const Tools = {
             if (loading) {
                 //   _this.loadingHide(vue)
             }
+            console.log("Test:");
+            console.log(url);
             let data = response.data;
+
             if (isSB) {
                 data = Tools.AESDecrypt(data);
             }
+
             if (!Tools.is_json(data)) {
                 data = JSON.parse(data);
             }
