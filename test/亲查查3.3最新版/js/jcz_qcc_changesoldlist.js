@@ -50,7 +50,6 @@ window.onload = function () {
 
             let loginhtml = `
                 <!--浮出-->
-               
                 <div class="jcz_qcc_changesold_list_float">
                     <style>
                         input:-webkit-autofill {
@@ -132,7 +131,7 @@ window.onload = function () {
                         <!--登录-->
                         <div v-show="isshow" id="jcz_qcc_changesold_float_right_login_box" style="width: 436px;height: 315px;background-color: #fff;border-radius: 5px;display: flex;flex-direction: column;z-index: 9999">
                             <div style="padding: 31px">
-                                <img style="width: 114px;height: 50px;" :src="getServerurl('right_one_bangke_logo.png')"/>
+                                <img style="width: 114px;height: 50px;" :src="getServerurl('right_one_qcc_logo.png')"/>
                                 <div style="width: 100%;display: flex;flex-direction: row;align-items: center;height: 40px;margin-top: 26px;border:1px solid #E6E6E6;border-radius: 2px;">
                                     <img :src="getServerurl('username.png')"
                                          style="width: 13px;height: 15px;margin-left: 14px;margin-right: 14px">
@@ -216,7 +215,7 @@ window.onload = function () {
                                     <div style="margin-top:10px;width: inherit;display: flex;flex-direction: row;align-items: center;font-size: 12px;color: #333">
                                         淘客查询：5亲币/订单
                                         <span style="flex: 1"></span>
-                                        <img style="margin-right: 11px;width: 12px;height: 12px;" :src="getServerurl('bkb_logo.png')">
+                                        <img style="margin-right: 11px;width: 12px;height: 12px;" :src="getServerurl('qb_logo.png')">
                                         亲币
                                         <span style="margin-left: 25px;font-size: 12px;color: #FFA74E;">{{coin}}</span>
                                         <span @click="czClick()" style="margin-left: 9px;font-size: 12px;color: #0088FF;cursor: pointer">充值</span>
@@ -276,7 +275,13 @@ window.onload = function () {
                                     if (!data.ok) {
                                         return;
                                     }
+                                    console.log("data.data.order_list:");
+                                    console.log(data.data.order_list);
+                                    console.log("  ");
                                     data.data.order_list.map((item) => {
+                                        console.log("item:");
+                                        console.log(item);
+                                        console.log("  ");
                                         for (let i = 0; i < cell.length; i++) {
                                             if (i % 2 != 0) continue;  //
                                             let top = "<style>\n" +
@@ -1262,18 +1267,18 @@ window.onload = function () {
                     wangwang = $(tbsellerwwclass).text();
                 }
                 //1上传旺旺
-                sold_list_utils.uploadwangwang();
+                //sold_list_utils.uploadwangwang();
                 //2插入已卖出列表右边数据
                 sold_list_utils.pushList();
                 // sold_list_utils.pushDialog();
                 //设置下一页点击事件 重新刷新数据
-                sold_list_utils.readClick();
+               // sold_list_utils.readClick();
                 //插入订单上面的滚动内容和公告
-                sold_list_utils.scrollHtml();
+                //sold_list_utils.scrollHtml();
                 //插入批量查询按钮
-                sold_list_utils.pushSearchAll();
+               // sold_list_utils.pushSearchAll();
                 //插入登录框
-                sold_list_utils.pushLogin();
+               // sold_list_utils.pushLogin();
             });
         }
     }

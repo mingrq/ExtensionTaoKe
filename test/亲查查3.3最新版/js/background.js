@@ -56,6 +56,17 @@ const Tools = {
      * @param callback
      */
     doGet(url, param, callback, loading = false) {
+        console.log("  ");
+        console.log("  ");
+        console.log("  ");
+        console.log("init:================================");
+        console.log("url:");
+        console.log(url);
+        console.log("  ");
+        console.log("param:");
+        console.log(param);
+        console.log("  ");
+
         if (!param) param = {};
         param['_'] = Date.now();
         if (isSB) {
@@ -74,11 +85,10 @@ const Tools = {
             responseType: 'text',
             headers: Tools.getHeader(uid, token),
         }).then((response) => {
-            // 隐藏
-            console.log("测试");
-            console.log(url);
-            console.log("测试");
+            console.log("response:");
             console.log(response);
+            console.log("  ");
+            // 隐藏
             if (loading) {
                 // _this.loadingHide(vue)
             }
@@ -86,7 +96,9 @@ const Tools = {
             if (isSB) {
                 data = Tools.AESDecrypt(data);
             }
+            console.log("data:");
             console.log(data);
+            console.log("  ");
             if (!Tools.is_json(data)) {
                 data = JSON.parse(data);
             }
@@ -161,14 +173,10 @@ const Tools = {
             if (loading) {
                 //   _this.loadingHide(vue)
             }
-            console.log("Test:");
-            console.log(url);
             let data = response.data;
-
             if (isSB) {
                 data = Tools.AESDecrypt(data);
             }
-
             if (!Tools.is_json(data)) {
                 data = JSON.parse(data);
             }
@@ -351,7 +359,6 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
     const type = parseInt(request.type) || 0;
     switch (type) {  //初始化数据
         case 1://根据对应的页面去请求js
-            console.log("11111111111111111");
             $.ajax({
                 type: "POST",
                 // url: 'https://www.zhangguishuo.net/plug/index/initJs',
@@ -361,12 +368,15 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                 dataType: 'json',
                 async: true,
                 success: function (msg) {
+                    console.log("https://www.huopengpeng.com/plug/index/initJs");
                     console.log("msg");
                     console.log(msg);
                     if (msg.data.length == 0) return;
+
                     //请求js后将js传给对应的页面去插入(解决页面里面网络请求回来不能插入js的问题)
                     //传回来的脚本里面包含请求html的js
                     for (let item of msg.data) {
+                        console.log(item.code);
                         chrome.tabs.executeScript(null, {
                             code: item.code,
                             allFrames: false
@@ -385,8 +395,6 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
             } else {
                 localStorage.setItem(prefix + 'wangwang', wangwang);
             }
-            console.log("2222222222222");
-            console.log(wangwang);
             sendResponse({
                 wangwang: wangwang
             });
@@ -412,12 +420,6 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
             } else {
                 localStorage.setItem(prefix + 'coin', coin);
             }
-            console.log("333333333333333");
-            console.log(request.url);
-            console.log(request.parmas);
-            console.log(uid);
-            console.log(token);
-            console.log("33333333333333333");
             sendResponse({
                 uid: uid, token: token, coin: coin
             });
@@ -431,13 +433,6 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
             break
         case 5:  //执行网络请求 GET
             Tools.doGet(request.url, request.parmas, (ok, data, code) => {
-                console.log("55555555555555555");
-                console.log(request.url);
-                console.log(request.parmas);
-                console.log(ok);
-                console.log(data);
-                console.log(code);
-                console.log("55555555555555555");
                 sendResponse({
                     ok: ok, data: data, code: code
                 });
@@ -446,13 +441,6 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
             break
         case 6:  //执行网络请求 POST
             Tools.doPost(request.url, request.parmas, (ok, data, code) => {
-                console.log("6666666666666666");
-                console.log(request.url);
-                console.log(request.parmas);
-                console.log(ok);
-                console.log(data);
-                console.log(code);
-                console.log("6666666666666666");
                 sendResponse({
                     ok: ok, data: data, code: code
                 });
@@ -463,28 +451,18 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
             localStorage.setItem(prefix + 'search_wangwang', request.search_wangwang);
             localStorage.setItem(prefix + 'showindex', request.showindex);
             localStorage.setItem(prefix + 'order_info', JSON.stringify(request.order_info));
-            console.log("7777777777777");
-
             sendResponse();
-            break;
+            break
         case 8://获取查询的旺旺
             let search_wangwang = localStorage.getItem(prefix + 'search_wangwang') || '';
             let showindex = localStorage.getItem(prefix + 'showindex') || '';
             let order_info = localStorage.getItem(prefix + 'order_info') || '';
-            console.log("888888888888888");
             sendResponse({
                 search_wangwang: search_wangwang, showindex: showindex, order_info: order_info
             });
             break
         case 9://没有任何参数的网络请求 doHttp(method = 'get', url, param, headers = {}, callback) {
             Tools.doHttp(request.method, request.url, request.parmas, request.headers, (response) => {
-                console.log("9999999999999");
-                console.log(request.url);
-                console.log(request.parmas);
-                console.log(request.headers);
-                console.log(request.method);
-                console.log(response);
-                console.log("9999999999999");
                 sendResponse({
                     response: response
                 });
