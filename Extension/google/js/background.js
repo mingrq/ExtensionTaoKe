@@ -345,7 +345,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
                 type: "POST",
                 // url: 'https://www.zhangguishuo.net/plug/index/initJs',
                 // url: 'http://47.99.76.134:7001/plug/index/initJs',
-                url: 'https://www.huopengpeng.com/plug/index/initJs',
+                url: baseServerUrl+'plug/index/initJs.php',
                 data: {href: request.href},
                 dataType: 'json',
                 async: true,

@@ -1,24 +1,24 @@
 /**
  * 插件打标吐槽弹窗
  */
-var jcz_qcc_dialog_href = window.location.href;
-var jcz_qcc_dialog_topHref = top.location.href;
-var jcz_qcc_dialog_isCc = false;//正式 false 测试 true
+var m_dialog_href = window.location.href;
+var m_dialog_topHref = top.location.href;
+var m_dialog_isCc = false;//正式 false 测试 true
 
 //是否正式 如果正式则请求网上的js 否则调试本地
-if (jcz_qcc_dialog_isCc) {
+if (m_dialog_isCc) {
     //如果请求的页面与浏览器页面相同则执行(防止包含iframe重复请求js)
-    if (jcz_qcc_dialog_href && jcz_qcc_dialog_href == jcz_qcc_dialog_topHref) {
+    if (m_dialog_href && m_dialog_href == m_dialog_topHref) {
         //传入对应的url 获取对应的js
         //截取字符串前面一段
-        jcz_qcc_dialog_href = jcz_qcc_dialog_href.split('?')[0];
-        chrome.extension.sendMessage({type: 1, href: jcz_qcc_dialog_topHref}, (data) => {
+        m_dialog_href = m_dialog_href.split('?')[0];
+        chrome.extension.sendMessage({type: 1, href: m_dialog_topHref}, (data) => {
         });
     }
 }
 //服务器代码
 else {
-    if (jcz_qcc_dialog_href && jcz_qcc_dialog_href == jcz_qcc_dialog_topHref) {
+    if (m_dialog_href && m_dialog_href == m_dialog_topHref) {
         let dialogbaseUrl = 'https://www.qinchacha.com/'; //网络请求正式地址
         //let dialogbaseUrl = 'http://192.168.0.111:7001/'; //网络请求正式地址
         let dialogUrl = {
@@ -41,12 +41,12 @@ else {
             active_qrcode: dialogbaseUrl + 'plug/buyer/active_qrcode',
             advert_ckick: dialogbaseUrl + 'advert/index/click',
             collection_phone: dialogbaseUrl + 'plug/buyer/collection_phone',
-        }
+        };
 
         let dialog_seller_wangwang = '';
         let uid = 0;
         let dialogtoken = '';
-        var jcz_qcc_dialog_search_wangwang = ''; //查询旺旺
+        var m_dialog_search_wangwang = ''; //查询旺旺
         var showindex = 0;//第一次进来的选中下标
         var order_info = null; //点击查淘客上面的订单信息
 
@@ -60,9 +60,9 @@ else {
         var rightlogin = null;
         var righttwogg = null;
 
-        var jcz_qcc_dialog_html = `
+        var m_dialog_html = `
                             <!--浮出-->
-                        <div class="jcz_qcc_float">
+                        <div class="m_float">
                         <style>
                                 input:-webkit-autofill {
                                   -webkit-box-shadow: 0 0 0px 1000px white inset;
@@ -78,7 +78,7 @@ else {
                                     resize:none;
                                     border-width:0px;
                                 }
-                                .jcz_qcc_float {
+                                .m_float {
                                     top: 0;
                                     left: 0;
                                     right: 0;
@@ -92,7 +92,7 @@ else {
                                     z-index: 999999;
                                 }
                             
-                                .jcz_qcc_float_div {
+                                .m_float_div {
                                     z-index: 20;
                                     width: 900px;
                                     height: auto;
@@ -103,7 +103,7 @@ else {
                                    
                                 }
                             
-                                .jcz_qcc_float_close_img {
+                                .m_float_close_img {
                                     position: absolute;
                                     top: -20px;
                                     right: -20px;
@@ -112,12 +112,12 @@ else {
                                     z-index: 100000;
                                 }
                             
-                                .jcz_qcc_left_redio_box {
+                                .m_left_redio_box {
                                     display: flex;
                                     flex-direction: column;
                                 }
                             
-                                .jcz_qcc_left_redio_item_box_select {
+                                .m_left_redio_item_box_select {
                                     width: 90px;
                                     height: 78px;
                                     display: flex;
@@ -130,7 +130,7 @@ else {
                                     border: solid 1px #FF8181;
                                 }
                             
-                                .jcz_qcc_left_redio_item_box_unselect {
+                                .m_left_redio_item_box_unselect {
                                     width: 90px;
                                     height: 78px;
                                     display: flex;
@@ -144,17 +144,17 @@ else {
                             
                                 }
                             
-                                .jcz_qcc_left_redio_item_text_select {
+                                .m_left_redio_item_text_select {
                                     font-size: 14px;
                                     color: #FFFFFF;
                                 }
                             
-                                .jcz_qcc_left_redio_item_text_unselect {
+                                .m_left_redio_item_text_unselect {
                                     font-size: 14px;
                                     color: #333;
                                 }
                             
-                                .jcz_qcc_left_redio_item_size {
+                                .m_left_redio_item_size {
                                     width: 20px;
                                     height: 20px;
                                     background-color: #FF0000;
@@ -168,7 +168,7 @@ else {
                                     line-height: 18px;
                                 }
                             
-                                .jcz_qcc_float_right_box {
+                                .m_float_right_box {
                                     width: 815px;
                                     box-shadow: 0px 14px 9px rgba(0, 0, 0, 0.16);
                                     background-color: #ffffff;
@@ -177,12 +177,12 @@ else {
                                     position: absolute;
                                 }
                             
-                                .jcz_qcc_float_right_one_box {
+                                .m_float_right_one_box {
                                     min-height: 480px;
                                     display: flex;
                                     width: 100%;
                                 }
-                                .jcz_qcc_float_right_login_box {
+                                .m_float_right_login_box {
                                     top: 0;
                                     left: 0;
                                     right: 0;
@@ -195,7 +195,7 @@ else {
                                     align-items: center;
                                     z-index: 1;
                                 }
-                                .jcz_qcc_float_right_twogg_box {
+                                .m_float_right_twogg_box {
                                     top: 0;
                                     left: 0;
                                     right: 0;
@@ -208,7 +208,7 @@ else {
                                     align-items: center;
                                     z-index: 1;
                                 }
-                                .jcz_qcc_float_right_first_join_background {
+                                .m_float_right_first_join_background {
                                     top: 0;
                                     left: 0;
                                     right: 0;
@@ -222,38 +222,38 @@ else {
                                     z-index: 2;
                                 }
                             
-                                .jcz_qcc_float_right_two_box {
+                                .m_float_right_two_box {
                                     min-height: 480px;
                                     display: flex;
                                     width: 100%;
                                 }
                             
-                                .jcz_qcc_float_right_three_box {
+                                .m_float_right_three_box {
                                     min-height: 480px;
                                     display: flex;
                                     width: 100%;
                                 }
                             
-                                .jcz_qcc_float_right_four_box {
+                                .m_float_right_four_box {
                                     min-height: 480px;
                                     display: flex;
                                     width: 100%;
                                 }
                             
-                                .jcz_qcc_float_right_five_box {
+                                .m_float_right_five_box {
                                     min-height: 480px;
                                     display: flex;
                                     width: 100%;
                                 }
                             
-                                .jcz_qcc_float_right_one_box_center {
+                                .m_float_right_one_box_center {
                                     padding: 16px;
                                     width: 100%;
                                     display: flex;
                                     flex-direction: column;
                                 }
                             
-                                .jcz_qcc_float_right_one_box_title {
+                                .m_float_right_one_box_title {
                                     display: flex;
                                     flex-direction: row;
                                     align-items: center;
@@ -261,35 +261,35 @@ else {
                                     height: 58px;
                                 }
                             
-                                .jcz_qcc_float_right_one_box_logoimg {
+                                .m_float_right_one_box_logoimg {
                                     width: 115px;
                                     height: 49px;
                                     margin-right: 28px;
                                 }
                             
-                                .jcz_qcc_float_right_one_box_wangwangtximg {
+                                .m_float_right_one_box_wangwangtximg {
                                     width: 58px;
                                     height: 58px;
                                     margin-right: 22px;
                                 }
                             
-                                .jcz_qcc_float_right_one_box_title_info {
+                                .m_float_right_one_box_title_info {
                                     display: flex;
                                     flex-direction: row;
                                     align-items: center;
                                 }
                             
-                                .jcz_qcc_float_right_one_box_title_wangwang {
+                                .m_float_right_one_box_title_wangwang {
                                     font-size: 22px;
                                     color: #333333;
                                 }
                             
-                                .jcz_qcc_float_right_one_box_title_registtime {
+                                .m_float_right_one_box_title_registtime {
                                     font-size: 14px;
                                     color: #333333;
                                 }
                             
-                                .jcz_qcc_float_right_one_right_item {
+                                .m_float_right_one_right_item {
                                     display: flex;
                                     flex-direction: row;
                                     border-bottom: solid 1px #E6E6E6;
@@ -299,19 +299,19 @@ else {
                                     align-items: center;
                                 }
                             
-                                .jcz_qcc_float_right_one_right_item span {
+                                .m_float_right_one_right_item span {
                                     color: #99A2A8;
                                     font-size: 14px;
                                 }
                             
-                                .jcz_qcc_float_right_one_right_item h6 {
+                                .m_float_right_one_right_item h6 {
                                     font-weight: inherit;
                                     margin-left: 30px;
                                     color: #99A2A8;
                                     font-size: 14px;
                                 }
                             
-                                .jcz_qcc_one_list_title {
+                                .m_one_list_title {
                                     border-bottom: solid 1px #E6E6E6;
                                     display: flex;
                                     align-items: center;
@@ -323,7 +323,7 @@ else {
                                     position: relative;
                                 }
                               
-                                .jcz_qcc_one_list_title_ms {
+                                .m_one_list_title_ms {
                                     display: none;
                                     padding: 4px 13px;
                                     flex-direction: row;
@@ -341,11 +341,11 @@ else {
                                     box-shadow:0px 3px 6px rgba(0,0,0,0.06);
                                 }
                                 
-                                .jcz_qcc_one_list_title:hover .jcz_qcc_one_list_title_ms{
+                                .m_one_list_title:hover .m_one_list_title_ms{
                                    display: block;
                                 }
                             
-                                .jcz_qcc_one_list_notice {
+                                .m_one_list_notice {
                                     margin-top: 13px;
                                     width: 100%;
                                     height: 15px;
@@ -353,7 +353,7 @@ else {
                                     overflow: hidden;
                                 }
                             
-                                .jcz_qcc_one_list_notice ul li {
+                                .m_one_list_notice ul li {
                                     list-style: none;
                                     line-height: 15px;
                                     display: block;
@@ -361,7 +361,7 @@ else {
                                     text-overflow: ellipsis;
                                     overflow: hidden;
                                 }
-                                .jcz_qcc_one_jiangquantitle {
+                                .m_one_jiangquantitle {
                                   font-size: 14px;
                                   color:#333333;
                                   border-bottom: solid 1px #E6E6E6;
@@ -372,17 +372,17 @@ else {
                                   position: relative;
                                 }
                                 
-                                .jcz_qcc_one_jiangquantitle:hover .jcz_qcc_one_list_title_ms{
+                                .m_one_jiangquantitle:hover .m_one_list_title_ms{
                                    display: block;
                                 }
-                                .jcz_qcc_fxzl:hover{
+                                .m_fxzl:hover{
                                    border-bottom: solid #0033FF 1px;
                                 }
-                                .jcz_qcc_czqb:hover{
+                                .m_czqb:hover{
                                    border-bottom: solid #0033FF 1px;
                                 }
                                 
-                                .jcz_qcc_one_list_ky{
+                                .m_one_list_ky{
                                   border-bottom: solid 1px #E6E6E6;
                                   display: flex;
                                   align-items: center;
@@ -393,7 +393,7 @@ else {
                                   font-size: 14px;
                                 }
                                 
-                                .jcz_qcc_one_list_kyms{
+                                .m_one_list_kyms{
                                     color: #333;
                                     z-index: 99;
                                     display: none;
@@ -409,7 +409,7 @@ else {
                                     border:1px solid rgba(230,230,230,1);
                                     box-shadow:0px 3px 6px rgba(0,0,0,0.06);
                                 }
-                                .jcz_qcc_one_list_ky:hover .jcz_qcc_one_list_kyms{
+                                .m_one_list_ky:hover .m_one_list_kyms{
                                     display: block;
                                 }
                                 
@@ -436,32 +436,32 @@ else {
                             </style>
                            
                            <!--加载中弹窗-->
-                           <div class="jcz_qcc_float_div" id="jcz_qcc_first_join_backgrount">
-                                <div class="jcz_qcc_float_right_first_join_background">
-                                      <img class="jcz_qcc_float_right_loadingimg" style="width: 64px;height: 64px;" >
+                           <div class="m_float_div" id="m_first_join_backgrount">
+                                <div class="m_float_right_first_join_background">
+                                      <img class="m_float_right_loadingimg" style="width: 64px;height: 64px;" >
                                 </div>
                            </div>
                                    
-                            <div class="jcz_qcc_float_div" style="display: none" id="jcz_qcc_float_div">
-                                    <div id="jcz_qcc_left_redio_box" class="jcz_qcc_left_redio_box">
+                            <div class="m_float_div" style="display: none" id="m_float_div">
+                                    <div id="m_left_redio_box" class="m_left_redio_box">
                                         <div :style="index == rediolist.length-1 ?'margin-top:20px;':'margin-top:0px;'"
-                                             :class="[select_index == index ? 'jcz_qcc_left_redio_item_box_select':'jcz_qcc_left_redio_item_box_unselect']"
+                                             :class="[select_index == index ? 'm_left_redio_item_box_select':'m_left_redio_item_box_unselect']"
                                              v-for="(vo,index) in rediolist" @click="changeLeftIndex(index)">
-                                            <span :class="[select_index == index ? 'jcz_qcc_left_redio_item_text_select':'jcz_qcc_left_redio_item_text_unselect']">{{vo.text}}</span>
-                                            <span class="jcz_qcc_left_redio_item_size" v-if="vo.leftsize">{{vo.leftsize}}</span>
+                                            <span :class="[select_index == index ? 'm_left_redio_item_text_select':'m_left_redio_item_text_unselect']">{{vo.text}}</span>
+                                            <span class="m_left_redio_item_size" v-if="vo.leftsize">{{vo.leftsize}}</span>
                                         </div>
                                     </div>
                                     <!--右边内容-->
-                                    <div class="jcz_qcc_float_right_box">
+                                    <div class="m_float_right_box">
                                     <!--提示信息弹窗-->
-                                    <div class="jcz_qcc_float_right_showmessagebox" style="display: none; z-index: 9999; top:200px;left:300px;position: absolute; width: auto;min-width: 130px;height: auto; min-height: 60px;color: #fff;font-size: 14px;align-items: center;justify-content: center;border-radius: 4px;background-color: rgba(0,0,0,0.7);padding-left: 20px;padding-right: 20px; box-shadow:0px 14px 9px rgba(0,0,0,0.16);"></div>
+                                    <div class="m_float_right_showmessagebox" style="display: none; z-index: 9999; top:200px;left:300px;position: absolute; width: auto;min-width: 130px;height: auto; min-height: 60px;color: #fff;font-size: 14px;align-items: center;justify-content: center;border-radius: 4px;background-color: rgba(0,0,0,0.7);padding-left: 20px;padding-right: 20px; box-shadow:0px 14px 9px rgba(0,0,0,0.16);"></div>
                                     <!--加载中弹窗-->
-                                    <div class="jcz_qcc_float_right_loading" style="display: none; z-index: 99999; top:200px;left:320px;position: absolute; width: 80px;height: 80px;align-items: center;justify-content: center;border-radius: 4px;background-color: #fff;box-shadow:0px 14px 9px rgba(0,0,0,0.16);">
-                                        <img class="jcz_qcc_float_right_loadingimg" style="width: 64px;height: 64px;" >
+                                    <div class="m_float_right_loading" style="display: none; z-index: 99999; top:200px;left:320px;position: absolute; width: 80px;height: 80px;align-items: center;justify-content: center;border-radius: 4px;background-color: #fff;box-shadow:0px 14px 9px rgba(0,0,0,0.16);">
+                                        <img class="m_float_right_loadingimg" style="width: 64px;height: 64px;" >
                                     </div>
                                   
                                     <!--登录-->
-                                    <div v-show="isshow" id="jcz_qcc_float_right_login_box" class="jcz_qcc_float_right_login_box">
+                                    <div v-show="isshow" id="m_float_right_login_box" class="m_float_right_login_box">
                                          <div style="width: 436px;height: 315px;background-color: #fff;border-radius: 5px;display: flex;flex-direction: column;z-index: 9999">
                                             <div style="padding: 31px">
                                                 <img style="width: 114px;height: 50px;" :src="getServerurl('right_one_qcc_logo.png')"/>
@@ -485,7 +485,7 @@ else {
                                          </div>
                                     </div>
                                     <!--右边第二个弹出广告-->
-                                    <div v-show="isshow" id="jcz_qcc_float_right_twogg_box" class="jcz_qcc_float_right_twogg_box">
+                                    <div v-show="isshow" id="m_float_right_twogg_box" class="m_float_right_twogg_box">
                                          <div style="width:  740px;height: 150px;display: flex;flex-direction: column;z-index: 9999;position: relative">
                                                 <img @click="gogg()" :src="img" style="width: 740px;height: 150px;cursor: pointer">
                                                 <div @click="close" style="display: flex;align-items: center;justify-content: center; position: absolute;top: 0px;right: 0px;width: auto; height: 22px;">
@@ -495,9 +495,9 @@ else {
                                          </div>
                                     </div>
                                     <!--查信誉内容-->
-                                    <div v-show="isshow" id="jcz_qcc_float_right_one_box" class="jcz_qcc_float_right_one_box" >
+                                    <div v-show="isshow" id="m_float_right_one_box" class="m_float_right_one_box" >
                                     
-                                    <div class="jcz_qcc_float_right_login_box" v-if="jqdialog.isshow" @click="jqdialog.isshow =false">
+                                    <div class="m_float_right_login_box" v-if="jqdialog.isshow" @click="jqdialog.isshow =false">
                                             <div style="display: flex;flex-direction: column;width:304px;padding-bottom:10px;background-color: #fff;border-radius:5px;">
                                                 <div style="display: flex;flex-direction: row;padding: 12px 17px;border-bottom: 1px solid #F8F8F8">
                                                     <span style="color:#000000;font-size: 12px;flex: 1">降权订单编号</span>
@@ -512,14 +512,14 @@ else {
                                             </div>
                                         </div>
                                     
-                                        <div class="jcz_qcc_float_right_one_box_center">
-                                            <div class="jcz_qcc_float_right_one_box_title">
+                                        <div class="m_float_right_one_box_center">
+                                            <div class="m_float_right_one_box_title">
                                                 <img :src="getServerurl('right_one_qcc_logo.png')"
-                                                     class="jcz_qcc_float_right_one_box_logoimg">
+                                                     class="m_float_right_one_box_logoimg">
                                                 <img :src="getServerurl('wangwangtx.png')"
-                                                     class="jcz_qcc_float_right_one_box_wangwangtximg">
-                                                <div class="jcz_qcc_float_right_one_box_title_info">
-                                                    <span class="jcz_qcc_float_right_one_box_title_wangwang">{{wangwang}}</span>
+                                                     class="m_float_right_one_box_wangwangtximg">
+                                                <div class="m_float_right_one_box_title_info">
+                                                    <span class="m_float_right_one_box_title_wangwang">{{wangwang}}</span>
                                                 </div>
                                             </div>
                                             <div style="display: flex;flex-direction: row;align-items: center;justify-content: center;height:26px;background-color:#F2F9FC;color:#99A2A8;font-size: 12px;margin-top: 10px">打标记录</div>
@@ -530,27 +530,27 @@ else {
                                                     <div style="border-bottom: solid 1px #E6E6E6;display: flex;align-items: center;justify-content: center;flex: 1;background-color: #fff">
                                                        <img style="width: 89px;height: 18px" :src="getServerurl('qcc_dialog_bjfx.png')">
                                                     </div>
-                                                    <div class="jcz_qcc_one_list_ky" >
+                                                    <div class="m_one_list_ky" >
                                                         可疑
                                                         <img :src="getServerurl('newwen.png')" style="width: 11px;height: 11px;position: absolute; right: 3px;top: 3px;">
-                                                        <div class="jcz_qcc_one_list_kyms">
+                                                        <div class="m_one_list_kyms">
                                                          <span style="font-size: 12px; font-weight: bold; color: #FF0000;margin-right: 5px">可疑:</span>指商家未提供完善的证据。
                                                         </div>
                                                     </div>
-                                                    <div class="jcz_qcc_one_list_ky" style="border-bottom: 0px">
+                                                    <div class="m_one_list_ky" style="border-bottom: 0px">
                                                         验证
                                                         <img :src="getServerurl('newwen.png')" style="width: 11px;height: 11px;position: absolute; right: 3px;top: 3px;">
-                                                         <div class="jcz_qcc_one_list_kyms">
+                                                         <div class="m_one_list_kyms">
                                                          <span style="font-size: 12px; font-weight: bold; color: #FF0000;margin-right: 5px">验证:</span>商家提供了相关截图证据。
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div v-for="(vo,index) in eydj_list"
                                                      style="width: 88px;display:flex;flex-direction: column;border-right: solid 1px #E6E6E6;">
-                                                    <div :style="{color:vo.doubtful +vo.confirm >0? '#ff0000':'#333'}" class="jcz_qcc_one_list_title">
+                                                    <div :style="{color:vo.doubtful +vo.confirm >0? '#ff0000':'#333'}" class="m_one_list_title">
                                                         {{vo.title}}
                                                         <img :src="getServerurl('newwen.png')" style="width: 11px;height: 11px;position: absolute; right: 3px;top: 3px;">
-                                                        <div class="jcz_qcc_one_list_title_ms">
+                                                        <div class="m_one_list_title_ms">
                                                            <span style="color: red;font-weight: bold">{{vo.title}}:</span>   {{vo.show_text}}
                                                         </div>
                                                     </div>
@@ -564,10 +564,10 @@ else {
                                                     </div>
                                                 </div>
                                                 <div style="width: 125px;display: flex;flex-direction: column;">
-                                                    <div class="jcz_qcc_one_jiangquantitle">
+                                                    <div class="m_one_jiangquantitle">
                                                        <span :style="{color: jiang_quan >0? '#FF0000':'#333333'}">降权处置</span> 
                                                         <img :src="getServerurl('newwen.png')" style="width: 11px;height: 11px;position: absolute; right: 3px;top: 3px;">
-                                                        <div class="jcz_qcc_one_list_title_ms">
+                                                        <div class="m_one_list_title_ms">
                                                            <span style="color: red;">降权处置:</span>商家被降权或删销量后，系统提示的账号。 展示结果为“未知”时，代表暂无商家标 记，暂时结果为数字时，代表有过降权处 置，可点击查看降权订单记录。
                                                         </div>
                                                     </div>
@@ -586,17 +586,17 @@ else {
                                                     <div style="border-bottom: solid 1px #E6E6E6;display: flex;align-items: center;justify-content: center;flex: 1;background-color: #fff">
                                                        <img style="width: 89px;height: 18px" :src="getServerurl('qcc_dialog_bjfx.png')">
                                                     </div>
-                                                    <div class="jcz_qcc_one_list_ky" >
+                                                    <div class="m_one_list_ky" >
                                                         可疑
                                                         <img :src="getServerurl('newwen.png')" style="width: 11px;height: 11px;position: absolute; right: 3px;top: 3px;">
-                                                        <div class="jcz_qcc_one_list_kyms">
+                                                        <div class="m_one_list_kyms">
                                                          <span style="font-size: 12px; font-weight: bold; color: #FF0000;margin-right: 5px">可疑:</span>指商家未提供完善的证据。
                                                         </div>
                                                     </div>
-                                                    <div class="jcz_qcc_one_list_ky" style="border-bottom: 0px">
+                                                    <div class="m_one_list_ky" style="border-bottom: 0px">
                                                         验证
                                                         <img :src="getServerurl('newwen.png')" style="width: 11px;height: 11px;position: absolute; right: 3px;top: 3px;">
-                                                         <div class="jcz_qcc_one_list_kyms">
+                                                         <div class="m_one_list_kyms">
                                                          <span style="font-size: 12px; font-weight: bold; color: #FF0000;margin-right: 5px">验证:</span>商家提供了相关截图证据。
                                                         </div>
                                                     </div>
@@ -605,19 +605,19 @@ else {
                                                     <div style="display: flex;flex-direction: row;flex: 1">
                                                       <div v-for="(vo,index) in eydj_list"
                                                              style="width: 88px;display: flex;flex-direction: column;border-right: solid 1px #E6E6E6;">
-                                                            <div style="color: #333333" class="jcz_qcc_one_list_title">
+                                                            <div style="color: #333333" class="m_one_list_title">
                                                                 {{vo.title}}
                                                                 <img :src="getServerurl('newwen.png')" style="width: 11px;height: 11px;position: absolute; right: 3px;top: 3px;">
-                                                                <div class="jcz_qcc_one_list_title_ms">
+                                                                <div class="m_one_list_title_ms">
                                                                    <span style="color: red;font-weight: bold">{{vo.title}}:</span>   {{vo.show_text}}
                                                                 </div>
                                                             </div>
                                                        </div>
                                                        <div style="width: 125px;display: flex;flex-direction: column;">
-                                                            <div class="jcz_qcc_one_jiangquantitle">
+                                                            <div class="m_one_jiangquantitle">
                                                                 降权处置
                                                                 <img :src="getServerurl('newwen.png')" style="width: 11px;height: 11px;position: absolute; right: 3px;top: 3px;">
-                                                                <div class="jcz_qcc_one_list_title_ms">
+                                                                <div class="m_one_list_title_ms">
                                                                    <span style="color: red;">降权处置:</span> 商家被降权或删销量后，系统提示的账号。 展示结果为“未知”时，代表暂无商家标 记，暂时结果为数字时，代表有过降权处 置，可点击查看降权订单记录。
                                                                 </div>
                                                             </div>
@@ -632,7 +632,7 @@ else {
                                             <!--买家信息-->
                                             <div style="display: flex;flex-direction: row;border: solid 1px #E6E6E6;margin-top: 10px">
                                                 <div style="display: flex;flex-direction: column;flex: 1">
-                                                    <div class="jcz_qcc_float_right_one_right_item">
+                                                    <div class="m_float_right_one_right_item">
                                                         <span class="jqc_qcc_tbinfo_left">买家旺旺</span>
                                                         <span class="jqc_qcc_tbinfo_right" style="color: #333">{{wangwang}}</span>
                                                         <span class="jqc_qcc_tbinfo_left">买家信誉</span>
@@ -643,34 +643,34 @@ else {
                                                           <span v-if="is_seller >0" style="color: #333">是</span>
                                                         </span>
                                                     </div>
-                                                    <div class="jcz_qcc_float_right_one_right_item ">
-                                                        <span class="jcz_qcc_one_list_ky jqc_qcc_tbinfo_left" style="border-bottom: 0px" >
+                                                    <div class="m_float_right_one_right_item ">
+                                                        <span class="m_one_list_ky jqc_qcc_tbinfo_left" style="border-bottom: 0px" >
                                                         好评率
                                                         <img :src="getServerurl('newwen.png')" style="width: 11px;height: 11px;position: absolute; right: 3px;top: 3px;">
-                                                             <div class="jcz_qcc_one_list_kyms" style="left:45px;">
+                                                             <div class="m_one_list_kyms" style="left:45px;">
                                                                 <span style="font-size: 12px; font-weight: bold; color: #ff0000;margin-right: 5px">好评率：</span>商家给买家的好评率。
                                                              </div>
                                                         </span>
                                                         <span class="jqc_qcc_tbinfo_right" style="color: #333">{{positive_ratio}}%</span>
-                                                        <span class="jcz_qcc_one_list_ky jqc_qcc_tbinfo_left" style="border-bottom: 0px" >
+                                                        <span class="m_one_list_ky jqc_qcc_tbinfo_left" style="border-bottom: 0px" >
                                                         周平均
                                                         <img :src="getServerurl('newwen.png')" style="width: 11px;height: 11px;position: absolute; right: 3px;top: 3px;">
-                                                             <div class="jcz_qcc_one_list_kyms" style="left:75px;z-index: 99">
+                                                             <div class="m_one_list_kyms" style="left:75px;z-index: 99">
                                                              <span style="font-size: 12px; font-weight: bold; color: #ff0000;margin-right: 5px;width: 60px">周平均：</span> 
                                                              买家从注册至今平均每周增加的信誉，可参考为购物频率。
                                                              </div>
                                                         </span>
                                                         <span class="jqc_qcc_tbinfo_right" style="color: #333">{{zhoupingjun}}</span>
-                                                          <span class="jcz_qcc_one_list_ky jqc_qcc_tbinfo_left" style="border-bottom: 0px" >
+                                                          <span class="m_one_list_ky jqc_qcc_tbinfo_left" style="border-bottom: 0px" >
                                                         月平均
                                                         <img :src="getServerurl('newwen.png')" style="width: 11px;height: 11px;position: absolute; right: 3px;top: 3px;">
-                                                             <div class="jcz_qcc_one_list_kyms" style="left:75px;">
+                                                             <div class="m_one_list_kyms" style="left:75px;">
                                                                  <span style="font-size: 12px; font-weight: bold; color: #ff0000;margin-right: 5px;width: 60px">月平均：</span>买家从注册至今平均每月增加的信誉，可参考为购物频率。
                                                              </div>
                                                         </span>
                                                         <span class="jqc_qcc_tbinfo_right" style="border: 0px;color:#333">{{yuepingjun}}</span>
                                                     </div>
-                                                    <div class="jcz_qcc_float_right_one_right_item">
+                                                    <div class="m_float_right_one_right_item">
                                                         <span class="jqc_qcc_tbinfo_left">性别</span>
                                                         <span class="jqc_qcc_tbinfo_right">
                                                         <span v-if="sex == 0"><img
@@ -694,7 +694,7 @@ else {
                                                              </div>
                                                          </span>
                                                     </div>
-                                                      <div class="jcz_qcc_float_right_one_right_item" style="border-bottom: 0px">
+                                                      <div class="m_float_right_one_right_item" style="border-bottom: 0px">
                                                         <span class="jqc_qcc_tbinfo_left">地区</span>
                                                         <span class="jqc_qcc_tbinfo_right">
                                                           <span v-if="area" style="color: #333">{{area}}</span>
@@ -709,7 +709,7 @@ else {
                                             </div>
                                             
                                             <!--轮播滚动-->
-                                            <div v-if="sign_list.length > 0" class="jcz_qcc_one_list_notice">
+                                            <div v-if="sign_list.length > 0" class="m_one_list_notice">
                                                 <ul>
                                                     <li v-for="vo in sign_list">
                                                         <div style="display: flex;flex-direction: row;align-items: center;font-size: 14px;color: #99A2A8">
@@ -724,7 +724,7 @@ else {
                                         </div>
                                     </div>
                                     <!--查淘客内容-->
-                                    <div v-show="isshow" id="jcz_qcc_float_right_two_box" class="jcz_qcc_float_right_two_box">
+                                    <div v-show="isshow" id="m_float_right_two_box" class="m_float_right_two_box">
                                         <div style="width: 100%;padding: 16px;display: flex;flex-direction: column">
                                             <!--头部-->
                                             <div style="width: 100%;display: flex;flex-direction: row;align-items: center;font-size: 12px">
@@ -793,7 +793,7 @@ else {
                                         </div>                                 
                                     </div>
                                     <!--评论吐槽内容-->
-                                    <div v-show="isshow" id="jcz_qcc_float_right_three_box" class="jcz_qcc_float_right_three_box">
+                                    <div v-show="isshow" id="m_float_right_three_box" class="m_float_right_three_box">
                                         <div style="width: 100%;padding: 16px;display: flex;flex-direction: row">
                                             <!--吐槽左边-->
                                             <div v-show="tc_list.length==0" style="width: 530px;display: flex;flex-direction: column;align-items: center;justify-content: center">
@@ -811,7 +811,7 @@ else {
                                                     </div>
                                                </div>
                                                <!--分页组件     -->
-                                               <div class="jcz_qcc_page-container"></div>
+                                               <div class="m_page-container"></div>
                                             </div>
                                             <!--吐槽右边-->
                                             <div style="display: flex;flex-direction: column;margin-left: 20px;width: 230px;">
@@ -839,7 +839,7 @@ else {
                                         </div>
                                     </div>
                                     <!--标记内容-->
-                                    <div v-show="isshow" id="jcz_qcc_float_right_four_box" class="jcz_qcc_float_right_four_box">
+                                    <div v-show="isshow" id="m_float_right_four_box" class="m_float_right_four_box">
                                         <div v-show="!remark" style="width: 100%;height: 100%;padding: 16px;display: flex;flex-direction: column">
                                             <!--头部-->
                                             <div style="width: 100%;height: 51px;display: flex;flex-direction: row;align-items: center"> 
@@ -951,7 +951,7 @@ else {
                                         </div>
                                     </div>
                                     <!--免费获币内容-->
-                                    <div v-show="isshow" id="jcz_qcc_float_right_five_box" class="jcz_qcc_float_right_five_box">
+                                    <div v-show="isshow" id="m_float_right_five_box" class="m_float_right_five_box">
                                         <div style="width: 100%;height: 100%;padding: 16px;display: flex;flex-direction: column;">
                                              <!--分享助力-->
                                              <div style="display: flex;flex-direction: row;align-items: center;">
@@ -1004,14 +1004,14 @@ else {
                                         </div>
                                     </div>
                                     <!--广告内容-->
-                                    <div id="jcz_qcc_right_guanggao" style="padding: 0px 18px 18px 18px;display: flex;flex-direction: row;align-items: center;background-color: #fff">
+                                    <div id="m_right_guanggao" style="padding: 0px 18px 18px 18px;display: flex;flex-direction: row;align-items: center;background-color: #fff">
                                       <span @click="ggleftclick()" style="width:275px;height:100px;margin-right: 13px;background-color: rgb(153, 162, 168);cursor: pointer">  <img v-if="left_img" :src="left_img" style="width:275px;height:100px;"></span>
                                       <span @click="ggrightclick()" style="width: 494px;height: 100px;background-color: rgb(153, 162, 168);cursor: pointer">  <img v-if="right_img" :src="right_img" style="width: 494px;height: 100px;"></span>
                                     </div>
                             </div>
 
-        <img  class="jcz_qcc_float_close_img"
-             id="jcz_qcc_float_close_img">
+        <img  class="m_float_close_img"
+             id="m_float_close_img">
     </div>
                             </div>
                     `;
@@ -1020,10 +1020,10 @@ else {
         let dialogutils = {
             //提示弹窗
             showMessage: function (messagecontent) {
-                $('.jcz_qcc_float_right_showmessagebox').css('display', 'flex');
-                $('.jcz_qcc_float_right_showmessagebox').text(messagecontent);
+                $('.m_float_right_showmessagebox').css('display', 'flex');
+                $('.m_float_right_showmessagebox').text(messagecontent);
                 setTimeout(function () {
-                    $('.jcz_qcc_float_right_showmessagebox').css('display', 'none');
+                    $('.m_float_right_showmessagebox').css('display', 'none');
                 }, 2000)
             },
             //时间格式化
@@ -1065,10 +1065,10 @@ else {
                 chrome.extension.sendMessage({
                     type: 8,
                 }, (data) => {
-                    jcz_qcc_dialog_search_wangwang = data.search_wangwang;
+                    m_dialog_search_wangwang = data.search_wangwang;
                     showindex = data.showindex;
                     order_info = JSON.parse(data.order_info);
-                    if (jcz_qcc_dialog_search_wangwang) {
+                    if (m_dialog_search_wangwang) {
                         let sellerwwclass = "a[class^=j_UserNick]"; //天猫店 商家旺旺
                         let tbsellerwwclass = "a[class^=user-nick]"; //淘宝店 商家旺旺
                         dialog_seller_wangwang = $(sellerwwclass).text();
@@ -1095,13 +1095,13 @@ else {
             },
             //显示加载框
             showLoading: function () {
-                $('.jcz_qcc_float_right_loading').css('display', 'flex');
+                $('.m_float_right_loading').css('display', 'flex');
                 let loadingurl = dialogutils.getServerurl('dialog_loading.gif');
-                $('.jcz_qcc_float_right_loadingimg').attr('src', loadingurl);
+                $('.m_float_right_loadingimg').attr('src', loadingurl);
             },
             //关闭加载狂
             hideLoading: function () {
-                $('.jcz_qcc_float_right_loading').css('display', 'none');
+                $('.m_float_right_loading').css('display', 'none');
             },
             //网络请求
             Net: function (netprams, response, isshowLoading = false) {
@@ -1313,13 +1313,13 @@ else {
             },
             //隐藏第一次进来的loading
             hidefistLoading: function () {
-                $('#jcz_qcc_first_join_backgrount').css('display', 'none');
-                $('#jcz_qcc_float_div').css('display', 'flex');
+                $('#m_first_join_backgrount').css('display', 'none');
+                $('#m_float_div').css('display', 'flex');
             },
             //1添加html
             pushDialog: function () {
-                $('body').append(jcz_qcc_dialog_html);
-                $('.jcz_qcc_float_right_loadingimg').attr('src', dialogutils.getServerurl('dialog_loading.gif'));
+                $('body').append(m_dialog_html);
+                $('.m_float_right_loadingimg').attr('src', dialogutils.getServerurl('dialog_loading.gif'));
                 setTimeout(() => {
                     //设置左边 广告  登录 vue
                     dialogutils.initJS();
@@ -1355,7 +1355,7 @@ else {
                             let params = {
                                 wangwang: dialog_seller_wangwang,
                                 order_num: order_info.order_num,
-                                tbaccount: jcz_qcc_dialog_search_wangwang,
+                                tbaccount: m_dialog_search_wangwang,
                                 phone: phone,
                                 address: address,
                             }
@@ -1374,7 +1374,7 @@ else {
 
             initJS: function () {
                 leftRedio = new Vue({
-                    el: '#jcz_qcc_left_redio_box',
+                    el: '#m_left_redio_box',
                     data: {
                         select_index: 0,
                         rediolist: [
@@ -1429,7 +1429,7 @@ else {
                                             //判断标签是否和搜索的相同
                                             if (rightTwo.order_info.order_num.trim() == $listitem.eq(i).find('span')[2].innerHTML.trim()) {
                                                 // 判断是否有查淘客按钮 防止重复添加
-                                                if ($listitem.eq(i).parents("div[class^='item-mod__trade-order___']").find('#jcz_qcc_nav_div_ctk').length != 0) {
+                                                if ($listitem.eq(i).parents("div[class^='item-mod__trade-order___']").find('#m_nav_div_ctk').length != 0) {
                                                     if (!rightTwo.err_text) {
                                                         righttwogg.getGg();
                                                     }
@@ -1481,7 +1481,7 @@ else {
                                 url: dialogUrl.red_dot,
                                 type: 5,
                                 parmas: {
-                                    wangwang: jcz_qcc_dialog_search_wangwang
+                                    wangwang: m_dialog_search_wangwang
                                 }
                             }, function (data) {
                                 if (data.ok) {
@@ -1500,7 +1500,7 @@ else {
                     },
                 });
                 guanggao = new Vue({
-                    el: '#jcz_qcc_right_guanggao',
+                    el: '#m_right_guanggao',
                     data: {
                         left_img: '',
                         right_img: '',
@@ -1578,7 +1578,7 @@ else {
                     },
                 })
                 rightlogin = new Vue({
-                    el: '#jcz_qcc_float_right_login_box',
+                    el: '#m_float_right_login_box',
                     data: {
                         isshow: false,
                         phone: '',
@@ -1660,7 +1660,7 @@ else {
                     },
                 })
                 righttwogg = new Vue({
-                    el: '#jcz_qcc_float_right_twogg_box',
+                    el: '#m_float_right_twogg_box',
                     data: {
                         isshow: false,
                         baseUrl: dialogbaseUrl,
@@ -1739,10 +1739,10 @@ else {
                 })
                 //设置右上角叉叉点击事件
                 let chachaimg = dialogutils.getServerurl('chacha.png');
-                $('.jcz_qcc_float_close_img').attr('src', chachaimg);
+                $('.m_float_close_img').attr('src', chachaimg);
                 //点击关闭
-                $('#jcz_qcc_float_close_img').click(function () {
-                    $('.jcz_qcc_float').remove();
+                $('#m_float_close_img').click(function () {
+                    $('.m_float').remove();
                     clearInterval(rightOne.interval)
                     leftRedio = null;
                     rightOne = null;
@@ -1753,8 +1753,8 @@ else {
                     guanggao = null;
                     rightlogin = null;
                 })
-                $('.jcz_qcc_float').click(function () {
-                    $('.jcz_qcc_float').remove();
+                $('.m_float').click(function () {
+                    $('.m_float').remove();
                     clearInterval(rightOne.interval)
                     leftRedio = null;
                     rightOne = null;
@@ -1766,17 +1766,17 @@ else {
                     rightlogin = null;
                     righttwogg = null;
                 });
-                $('.jcz_qcc_float_div').unbind().click(function () {
+                $('.m_float_div').unbind().click(function () {
                     event.stopPropagation();
                 });
             },
 
             initRightJS: function () {
                 rightOne = new Vue({
-                    el: '#jcz_qcc_float_right_one_box',
+                    el: '#m_float_right_one_box',
                     data: {
                         isshow: false,
-                        wangwang: jcz_qcc_dialog_search_wangwang,
+                        wangwang: m_dialog_search_wangwang,
                         regist_time: 946656000,//默认值 防止nan
                         reputation: 0,//信誉
                         reputationimg: '',
@@ -1841,7 +1841,7 @@ else {
                                 url: dialogUrl.reputation,
                                 type: 5,
                                 parmas: {
-                                    wangwang: jcz_qcc_dialog_search_wangwang
+                                    wangwang: m_dialog_search_wangwang
                                 }
                             }, function (data) {
                                 if (data.ok) {
@@ -1880,7 +1880,7 @@ else {
                                 url: dialogUrl.wangwang_info,
                                 type: 5,
                                 parmas: {
-                                    wangwang: jcz_qcc_dialog_search_wangwang
+                                    wangwang: m_dialog_search_wangwang
                                 }
                             }, function (data) {
                                 if (data.ok) {
@@ -1930,7 +1930,7 @@ else {
                                     if (rightOne.sign_list.length > 0) {
                                         //设置滚动
                                         rightOne.interval = setInterval(function () {
-                                            rightOne.noticeUp('.jcz_qcc_one_list_notice ul', '-15px', 500)
+                                            rightOne.noticeUp('.m_one_list_notice ul', '-15px', 500)
                                         }, 3000);
                                     }
                                 } else {
@@ -2027,7 +2027,7 @@ else {
                         },
                         showJqDialog() {
                             dialogutils.Net({
-                                url: dialogUrl.buyer_drops + jcz_qcc_dialog_search_wangwang,
+                                url: dialogUrl.buyer_drops + m_dialog_search_wangwang,
                                 type: 5,
                                 parmas: {}
                             }, function (data) {
@@ -2082,11 +2082,11 @@ else {
                     },
                 })
                 rightTwo = new Vue({
-                    el: '#jcz_qcc_float_right_two_box',
+                    el: '#m_float_right_two_box',
                     data: {
                         isshow: false,
                         order_info: order_info,
-                        search_wangwang: jcz_qcc_dialog_search_wangwang,
+                        search_wangwang: m_dialog_search_wangwang,
                         coin: 0,
                         is_tbk: -1,//0不是淘客订单 1是淘客订单 2缺钱
                         is_success: false,
@@ -2195,7 +2195,7 @@ else {
                             //判断加入的是那个html
                             let html = '';
                             <!--无淘客佣金-->
-                            let wutaoke = "<div id='jcz_qcc_nav_div_wtk' class='jcz_qcc_nav_div_wtk' style=\"margin: -15px 0px;\n" +
+                            let wutaoke = "<div id='m_nav_div_wtk' class='m_nav_div_wtk' style=\"margin: -15px 0px;\n" +
                                 "            padding: 14px 0px 15px;\n" +
                                 "            width: 114px;\n" +
                                 "            position: relative;\n" +
@@ -2210,7 +2210,7 @@ else {
                                 "            </div>\n" +
                                 "        </div>\n";
                             let shiyongtaoke = "        <!--使用了淘客-->\n" +
-                                "        <div id='jcz_qcc_nav_div_sytk' class='jcz_qcc_nav_div_sytk' style=\"margin: -15px 0px;\n" +
+                                "        <div id='m_nav_div_sytk' class='m_nav_div_sytk' style=\"margin: -15px 0px;\n" +
                                 "            padding: 14px 0px 15px;\n" +
                                 "            width: 114px;\n" +
                                 "            position: relative;\n" +
@@ -2235,18 +2235,18 @@ else {
                                 //判断标签是否和搜索的相同
                                 if (rightTwo.order_info.order_num.trim() == $listitem.eq(i).find('span')[2].innerHTML.trim()) {
                                     // 判断是否有查淘客按钮 防止重复添加
-                                    if ($listitem.eq(i).parents("div[class^='item-mod__trade-order___']").find('#jcz_qcc_nav_div_ctk').length > 0) {
+                                    if ($listitem.eq(i).parents("div[class^='item-mod__trade-order___']").find('#m_nav_div_ctk').length > 0) {
                                         //删除查淘客按钮
-                                        $listitem.eq(i).parents("div[class^='item-mod__trade-order___']").find('#jcz_qcc_nav_div_ctk').remove();
+                                        $listitem.eq(i).parents("div[class^='item-mod__trade-order___']").find('#m_nav_div_ctk').remove();
                                         //添加对应的html
-                                        $listitem.eq(i).parents("div[class^='item-mod__trade-order___']").find('.jcz_qcc_header_right').append(html);
+                                        $listitem.eq(i).parents("div[class^='item-mod__trade-order___']").find('.m_header_right').append(html);
                                     }
 
                                 }
                             }
 
                             //使用了淘客
-                            $('.jcz_qcc_nav_div_sytk').unbind().click(function () {
+                            $('.m_nav_div_sytk').unbind().click(function () {
                                 //拿到标题
                                 let parents = $(this).parents("div[class^='item-mod__trade-order___']");
                                 //拿到标题
@@ -2259,7 +2259,7 @@ else {
                                 dialogutils.openSearchwwDialog(1, wangwang, order_num, create_time, paynum, order_img, order_title);
                             })
                             //无淘客
-                            $('.jcz_qcc_nav_div_wtk').unbind().click(function () {
+                            $('.m_nav_div_wtk').unbind().click(function () {
                                 //拿到标题
                                 let parents = $(this).parents("div[class^='item-mod__trade-order___']");
                                 //拿到标题
@@ -2282,9 +2282,9 @@ else {
                     },
                 })
                 rightThree = new Vue({
-                    el: '#jcz_qcc_float_right_three_box',
+                    el: '#m_float_right_three_box',
                     data: {
-                        wangwang: jcz_qcc_dialog_search_wangwang,
+                        wangwang: m_dialog_search_wangwang,
                         isshow: false,
                         tc_list: [],
                         page: 1,
@@ -2302,7 +2302,7 @@ else {
                                 url: dialogUrl.complaints,
                                 type: 5,
                                 parmas: {
-                                    wangwang: jcz_qcc_dialog_search_wangwang,
+                                    wangwang: m_dialog_search_wangwang,
                                     page: page,
                                     page_size: this.page_size,
                                 }
@@ -2325,7 +2325,7 @@ else {
                         },
                         initPage: function () {
                             let pageSize = this.page_size
-                            rightThree.pager = new Pagination('.jcz_qcc_page-container', {
+                            rightThree.pager = new Pagination('.m_page-container', {
                                 pageSize: pageSize,
                                 autoLoad: true,
                                 unit: '条',
@@ -2373,7 +2373,7 @@ else {
                                 url: dialogUrl.complaint,
                                 type: 6,
                                 parmas: {
-                                    wangwang: jcz_qcc_dialog_search_wangwang,
+                                    wangwang: m_dialog_search_wangwang,
                                     content: rightThree.tc_input,
                                 }
                             }, function (data) {
@@ -2407,10 +2407,10 @@ else {
                     },
                 })
                 rightFour = new Vue({
-                    el: '#jcz_qcc_float_right_four_box',
+                    el: '#m_float_right_four_box',
                     data: {
                         isshow: false,
-                        wangwang: jcz_qcc_dialog_search_wangwang,
+                        wangwang: m_dialog_search_wangwang,
                         baseUrl: dialogbaseUrl,
                         leixinglist: ['恶意打假', '恶意退款', '恶意差评', '抽检', '评价广告', '刷单返利', '降权号'],
                         mstextlist: ['用工商，发票，字体，商标，著作权，各种方式坑钱。', '做任务跑路，知假买假，仅退款。', '恶意差评', '该类账号购物后会存在商品链接被删除的风险。', '在评价里面打广告。', '做任务还走淘宝客或返利网坑钱。', '商家被降权或删销量后，系统提示的账号。'],
@@ -2525,7 +2525,7 @@ else {
                                 url: dialogUrl.sign,
                                 type: 6,
                                 parmas: {
-                                    wangwang: jcz_qcc_dialog_search_wangwang,
+                                    wangwang: m_dialog_search_wangwang,
                                     remark: rightFour.sh_input,
                                     images: JSON.stringify(rightFour.uploadimglist),
                                     type: rightFour.leixingselect,
@@ -2548,7 +2548,7 @@ else {
                                 url: dialogUrl.sign_info,
                                 type: 5,
                                 parmas: {
-                                    wangwang: jcz_qcc_dialog_search_wangwang,
+                                    wangwang: m_dialog_search_wangwang,
                                 }
                             }, function (data) {
                                 if (data.ok) {
@@ -2591,7 +2591,7 @@ else {
                     },
                 })
                 rightFive = new Vue({
-                    el: '#jcz_qcc_float_right_five_box',
+                    el: '#m_float_right_five_box',
                     data: {
                         isshow: false,
                         is_finish: 0,

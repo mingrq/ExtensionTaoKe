@@ -1,24 +1,24 @@
-var jcz_qcc_errorww_href = window.location.href;
-var jcz_qcc_errorww_top_Href = top.location.href;
-var jcz_qcc_errorww_isCc = false;//正式 false 测试 true
+var m_errorww_href = window.location.href;
+var m_errorww_top_Href = top.location.href;
+var m_errorww_isCc = false;//正式 false 测试 true
 
 //是否正式 如果正式则请求网上的js 否则调试本地
-if (jcz_qcc_errorww_isCc) {
+if (m_errorww_isCc) {
     //如果请求的页面与浏览器页面相同则执行(防止包含iframe重复请求js)
-    if (jcz_qcc_errorww_href && jcz_qcc_errorww_href == jcz_qcc_errorww_top_Href) {
+    if (m_errorww_href && m_errorww_href == m_errorww_top_Href) {
         //传入对应的url 获取对应的js
         //截取字符串前面一段
-        jcz_qcc_errorww_href = jcz_qcc_errorww_href.split('?')[0];
-        chrome.extension.sendMessage({type: 1, href: jcz_qcc_errorww_href}, (data) => {
+        m_errorww_href = m_errorww_href.split('?')[0];
+        chrome.extension.sendMessage({type: 1, href: m_errorww_href}, (data) => {
         });
     }
 }
 //服务器代码
 else {
-    if (jcz_qcc_errorww_href && jcz_qcc_errorww_href == jcz_qcc_errorww_top_Href) {
+    if (m_errorww_href && m_errorww_href == m_errorww_top_Href) {
         let err_baseUrl = 'https://www.qinchacha.com/'; //网络请求测试地址
         //let err_baseUrl = 'http://192.168.0.111:7001/'; //网络请求测试地址
-        let saveuploadingkey = 'jcz_qcc_plug_uploading';
+        let saveuploadingkey = 'm_plug_uploading';
         let ismystart = false;//判断是否当前页启动的自动上传旺旺
 
         //这个地方只写测试 未来放到服务器上直接下载下来

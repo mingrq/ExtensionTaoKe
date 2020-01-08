@@ -1,19 +1,19 @@
-let jcz_qcc_sold_item_href = window.location.href;
-let jcz_qcc_sold_item_topHref = top.location.href;
-let jcz_qcc_sold_item_isCc = false;//正式 false 测试 true
+let m_sold_item_href = window.location.href;
+let m_sold_item_topHref = top.location.href;
+let m_sold_item_isCc = false;//正式 false 测试 true
 //是否正式 如果正式则请求网上的js 否则调试本地
-if (jcz_qcc_sold_item_isCc) {
+if (m_sold_item_isCc) {
     //如果请求的页面与浏览器页面相同则执行(防止包含iframe重复请求js)
-    if (jcz_qcc_sold_item_href && jcz_qcc_sold_item_href == jcz_qcc_sold_item_topHref) {
+    if (m_sold_item_href && m_sold_item_href == m_sold_item_topHref) {
         //传入对应的url 获取对应的js
         //截取字符串前面一段
-        jcz_qcc_sold_item_href = jcz_qcc_sold_item_href.split('?')[0];
-        chrome.extension.sendMessage({type: 1, href: jcz_qcc_sold_item_href}, (data) => {
+        m_sold_item_href = m_sold_item_href.split('?')[0];
+        chrome.extension.sendMessage({type: 1, href: m_sold_item_href}, (data) => {
         });
     }
 } else {
-    if (jcz_qcc_sold_item_href == jcz_qcc_sold_item_topHref) {
-        let baseUrl = 'https://www.qinchacha.com/'; //网络请求测试地址
+    if (m_sold_item_href == m_sold_item_topHref) {
+        let baseUrl = baseServerUrl; //网络请求测试地址
         //let baseUrl = 'http://192.168.0.111:7001/'; //网络请求测试地址
         //let baseUrl = 'http://192.168.0.111:7001/'; //网络请求测试地址
         let uid = 0;
@@ -39,36 +39,36 @@ if (jcz_qcc_sold_item_isCc) {
         let searchAllclass = "div[class^=simple-pagination-mod__container___]"; //搜索全部class
         //这个地方只写测试 未来放到服务器上直接下载下来
         let sold_list_urls = {
-            upload_wangwang: baseUrl + 'plug/index/upload_wangwang',
-            init_list: baseUrl + 'plug/index/init_list',
-            init_notice: baseUrl + 'plug/index/notice',
-            login: baseUrl + 'plug/index/login',
-            user_info: baseUrl + 'plug/index/info',
-            batch_tbk_info: baseUrl + 'plug/buyer/batch_tbk_info',
-        }
+            upload_wangwang: baseUrl + 'plug/index/upload_wangwang.php',
+            init_list: baseUrl + 'plug/index/init_list.php',
+            init_notice: baseUrl + 'plug/index/notice.php',
+            login: baseUrl + 'plug/index/login.php',
+            user_info: baseUrl + 'plug/index/info.php',
+            batch_tbk_info: baseUrl + 'plug/buyer/batch_tbk_info.php',
+        };
 
         let loginhtml = `
                 <!--浮出-->
                 <!--插件升级弹窗-->
-                <div class="jcz_qcc_upgrade" style="top: 0;left: 0;right: 0;bottom: 0; position: fixed;display: none;flex-direction: column; justify-content: center;align-items: center;z-index: 999;  background: rgba(0, 0, 0, 0.2);">
-                    <div id="jcz_qcc_upgrade_content" style="width: 300px;  height: 150px; background-color: #fff;display: flex;flex-direction: column;border-radius: 4px; box-shadow:0px 14px 9px rgba(0,0,0,0.16);">
+                <div class="m_upgrade" style="top: 0;left: 0;right: 0;bottom: 0; position: fixed;display: none;flex-direction: column; justify-content: center;align-items: center;z-index: 999;  background: rgba(0, 0, 0, 0.2);">
+                    <div id="m_upgrade_content" style="width: 300px;  height: 150px; background-color: #fff;display: flex;flex-direction: column;border-radius: 4px; box-shadow:0px 14px 9px rgba(0,0,0,0.16);">
                         <span style="font-size: 14px;margin-top: 5px;margin-left: 10px;color: #aaaaaa">
                             提示
                         </span>
                         <span style="font-size: 14px;margin-top: 5px;margin-left: 10px;flex: 1">
-                            亲查查插件已经有新版本了，请前去官网下载最新版本插件获取更好的体验。
+                            邦客插件已经有新版本了，请前去官网下载最新版本插件。
                         </span>
                         <div style="margin-top: 10px; width: inherit;height: 40px;display: flex;flex-direction: row;border-top: solid #eee 1px">
-                            <span id="jcz_qcc_upgrade_cancle" style="display: flex;align-items: center;justify-content: center ;font-size: 14px;flex: 1;color: #999999;border-right: solid #eee 1px;cursor: pointer">
+                            <span id="m_upgrade_cancle" style="display: flex;align-items: center;justify-content: center ;font-size: 14px;flex: 1;color: #999999;border-right: solid #eee 1px;cursor: pointer">
                                取消
                             </span>
-                            <span id="jcz_qcc_upgrade_go" style="display: flex;align-items: center;justify-content: center;font-size: 14px;flex: 1;color: #3898fc;cursor: pointer">
+                            <span id="m_upgrade_go" style="display: flex;align-items: center;justify-content: center;font-size: 14px;flex: 1;color: #3898fc;cursor: pointer">
                                前去更新
                             </span>
                         </div>
                     </div>
                 </div>
-                <div class="jcz_qcc_changesold_list_float">
+                <div class="m_changesold_list_float">
                     <style>
                         input:-webkit-autofill {
                           -webkit-box-shadow: 0 0 0px 1000px white inset;
@@ -83,7 +83,7 @@ if (jcz_qcc_sold_item_isCc) {
                             border-width: 0px;
                         }
                 
-                        .jcz_qcc_changesold_list_float {
+                        .m_changesold_list_float {
                             top: 0;
                             left: 0;
                             right: 0;
@@ -97,7 +97,7 @@ if (jcz_qcc_sold_item_isCc) {
                             z-index: 999999;
                         }
                 
-                        .jcz_qcc_changesold_float_box {
+                        .m_changesold_float_box {
                             top: 0;
                             left: 0;
                             right: 0;
@@ -110,17 +110,17 @@ if (jcz_qcc_sold_item_isCc) {
                             z-index: 1;
                         }
                 
-                        .jcz_qcc_float_right_one_right_item span {
+                        .m_float_right_one_right_item span {
                             color: #333333;
                             font-size: 14px;
                         }
                 
-                        .jcz_qcc_float_right_one_right_item h6 {
+                        .m_float_right_one_right_item h6 {
                             margin-left: 30px;
                             color: #99A2A8;
                             font-size: 14px;
                         }
-                        .jcz_qcc_shangesold_showmessagebox{
+                        .m_shangesold_showmessagebox{
                             position: absolute;
                             display: none;
                             padding-left: 20px;
@@ -147,14 +147,14 @@ if (jcz_qcc_sold_item_isCc) {
                 
                     </style>
                    
-                    <div class="jcz_qcc_changesold_float_box">
+                    <div class="m_changesold_float_box">
                         <!--提示信息弹窗-->
-                        <div class="jcz_qcc_shangesold_showmessagebox" >
+                        <div class="m_shangesold_showmessagebox" >
                         </div>
                         <!--登录-->
-                        <div v-show="isshow" id="jcz_qcc_changesold_float_right_login_box" style="width: 436px;height: 315px;background-color: #fff;border-radius: 5px;display: flex;flex-direction: column;z-index: 9999">
+                        <div v-show="isshow" id="m_changesold_float_right_login_box" style="width: 436px;height: 315px;background-color: #fff;border-radius: 5px;display: flex;flex-direction: column;z-index: 9999">
                             <div style="padding: 31px">
-                                <img style="width: 114px;height: 50px;" :src="getServerurl('right_one_qcc_logo.png')"/>
+                                <img style="width: 114px;height: 50px;" :src="getServerurl('right_one_logo.png')"/>
                                 <div style="width: 100%;display: flex;flex-direction: row;align-items: center;height: 40px;margin-top: 26px;border:1px solid #E6E6E6;border-radius: 2px;">
                                     <img :src="getServerurl('username.png')"
                                          style="width: 13px;height: 15px;margin-left: 14px;margin-right: 14px">
@@ -179,7 +179,7 @@ if (jcz_qcc_sold_item_isCc) {
                             </div>
                         </div>
                          <!--批量查询弹框-->
-                        <div v-show="isshow" id="jcz_qcc_changesold_float_plcx_box" style="width: 520px;height: 561px;background-color: #fff;border-radius: 5px;z-index: 9999;display: flex">
+                        <div v-show="isshow" id="m_changesold_float_plcx_box" style="width: 520px;height: 561px;background-color: #fff;border-radius: 5px;z-index: 9999;display: flex">
                             <div style="padding: 15px;display: flex;flex-direction: column;align-items: center;width: inherit">
                                 <div style="display: flex;flex-direction: row;align-items:center;font-size: 16px;color: #333">
                                     <img style="width: 16px;height: 16px;margin-right: 5px" :src="getServerurl('item_logo.png')"/>淘客订单批量查询
@@ -251,10 +251,10 @@ if (jcz_qcc_sold_item_isCc) {
                                         淘客查询中    
                                     </span>
                                     <div style="margin-top:10px;width: inherit;display: flex;flex-direction: row;align-items: center;font-size: 12px;color: #333">
-                                        批量查询需要5亲币/订单。
+                                        批量查询需要5币/订单。
                                         <span style="flex: 1"></span>
-                                        <img style="margin-right: 11px;width: 12px;height: 12px;" :src="getServerurl('qb_logo.png')">
-                                        亲币
+                                        <img style="margin-right: 11px;width: 12px;height: 12px;" :src="getServerurl('jinbi_logo.png')">
+                                        币
                                         <span style="margin-left: 25px;font-size: 12px;color: #FFA74E;">{{coin}}</span>
                                         <span @click="czClick()" style="margin-left: 9px;font-size: 12px;color: #0088FF;cursor: pointer">充值</span>
                                         <span @click="refushClcik()" style="margin-left: 9px;font-size: 12px;color: #0088FF;cursor: pointer">刷新</span>
@@ -263,7 +263,7 @@ if (jcz_qcc_sold_item_isCc) {
                             </div>
                         </div>
                         <!--当页标记汇总-->
-                        <div v-show="isshow" id="jcz_qcc_changesold_float_allbj_box" style="width: 430px;padding:15px;background-color: #fff;border-radius: 5px;z-index: 9999;display: flex">
+                        <div v-show="isshow" id="m_changesold_float_allbj_box" style="width: 430px;padding:15px;background-color: #fff;border-radius: 5px;z-index: 9999;display: flex">
                             <div style="display: flex;flex-direction: column;align-items: center;width: inherit">
                                 <div style="display: flex;flex-direction: row;align-items:center;font-size: 16px;color: #333">
                                     <img style="width: 16px;height: 16px;margin-right: 5px" :src="getServerurl('item_logo.png')"/>当页标记汇总
@@ -308,10 +308,10 @@ if (jcz_qcc_sold_item_isCc) {
         let sold_list_utils = {
             //提示弹窗
             showMessage: function (messagecontent) {
-                $('.jcz_qcc_shangesold_showmessagebox').css('display', 'flex');
-                $('.jcz_qcc_shangesold_showmessagebox').text(messagecontent);
+                $('.m_shangesold_showmessagebox').css('display', 'flex');
+                $('.m_shangesold_showmessagebox').text(messagecontent);
                 setTimeout(function () {
-                    $('.jcz_qcc_shangesold_showmessagebox').css('display', 'none');
+                    $('.m_shangesold_showmessagebox').css('display', 'none');
                 }, 2000)
             },
             //修改已卖出列表插入数据
@@ -343,8 +343,8 @@ if (jcz_qcc_sold_item_isCc) {
                             }
                         }, (data) => {
                             //防止下一页数据重复
-                            $('.jcz_qcc_plug_main_div').remove();
-                            $('.jcz_qcc_bj_all_box').remove();
+                            $('.m_plug_main_div').remove();
+                            $('.m_bj_all_box').remove();
                             setTimeout(() => {
                                 //插入是否使用淘客
                                 let cell = $(pushitenrightcalss);
@@ -355,11 +355,11 @@ if (jcz_qcc_sold_item_isCc) {
                                     for (let i = 0; i < cell.length; i++) {
                                         if (i % 2 != 0) continue;  //
                                         let top = "<style>\n" +
-                                            "    .jcz_qcc_nav_div:hover {\n" +
+                                            "    .m_nav_div:hover {\n" +
                                             "        border-bottom-color: #0077FF\n" +
                                             "    }\n" +
                                             "\n" +
-                                            "    .jcz_qcc_nav_div {\n" +
+                                            "    .m_nav_div {\n" +
                                             "        margin: -15px 0px;\n" +
                                             "        padding: 11px 0px 11px;\n" +
                                             "        width: 114px;\n" +
@@ -373,13 +373,13 @@ if (jcz_qcc_sold_item_isCc) {
                                             "        cursor: pointer;\n" +
                                             "    }\n" +
                                             "</style>\n" +
-                                            "<div class=\"jcz_qcc_plug_main_div\" style=\"height: auto;float: right;margin-top: 0px; display: flex;\n" +
+                                            "<div class=\"m_plug_main_div\" style=\"height: auto;float: right;margin-top: 0px; display: flex;\n" +
                                             "            flex-direction: row;\n" +
                                             "            align-items: center;\n" +
                                             "            font-size: 12px;\n" +
                                             "            margin-right: -1px;\n" +
                                             "            width: 342px;\">\n" +
-                                            "    <div class=\"jcz_qcc_header_div\" style=\"   width: 114px;\n" +
+                                            "    <div class=\"m_header_div\" style=\"   width: 114px;\n" +
                                             "            margin: -15px 0px;\n" +
                                             "            padding: 12px 0px;\n" +
                                             "            height: auto;\n" +
@@ -387,37 +387,37 @@ if (jcz_qcc_sold_item_isCc) {
                                             "            flex-direction: row;\n" +
                                             "            align-items: center;\n" +
                                             "            justify-content: center;\">\n" +
-                                            "        <img class=\"jcz_qcc_header_img_qcc\"\n" +
+                                            "        <img class=\"m_header_img_qcc\"\n" +
                                             "             src=\"" + photourl + "logo_qcc.png?v=0.3\" style=\" width: 77px;\n" +
                                             "            height: 22px;\"/>\n" +
                                             "    </div>\n" +
-                                            "    <div class=\"jcz_qcc_header_right\" style=\"flex: 1;\n" +
+                                            "    <div class=\"m_header_right\" style=\"flex: 1;\n" +
                                             "            display: flex;\n" +
                                             "            flex-direction: row;\n" +
                                             "            height: auto;\">\n" +
                                             "        <!--查信誉-->\n" +
-                                            "        <div id='jcz_qcc_nav_div_cxy' class=\"jcz_qcc_nav_div jcz_qcc_nav_div_cxy\">\n" +
-                                            "            <img class=\"jcz_qcc_nav_div_img\"\n" +
+                                            "        <div id='m_nav_div_cxy' class=\"m_nav_div m_nav_div_cxy\">\n" +
+                                            "            <img class=\"m_nav_div_img\"\n" +
                                             "                 src=\"" + photourl + "item_search.png\" style=\" width: 12px;\n" +
                                             "            height: 12px;\n" +
                                             "            margin: 0px 6px;\">\n" +
-                                            "            <div class=\"jcz_qcc_nav_div_title\" style=\" color: #0077FF;\n" +
+                                            "            <div class=\"m_nav_div_title\" style=\" color: #0077FF;\n" +
                                             "            font-size: 12px;\">查信誉\n" +
                                             "            </div>\n" +
                                             "        </div>\n";
 
                                         let chaxinyu = "        <!--查淘客-->\n" +
-                                            "        <div id='jcz_qcc_nav_div_ctk'  class=\"jcz_qcc_nav_div jcz_qcc_nav_div_ctk\">\n" +
-                                            "            <img class=\"jcz_qcc_nav_div_img\"\n" +
+                                            "        <div id='m_nav_div_ctk'  class=\"m_nav_div m_nav_div_ctk\">\n" +
+                                            "            <img class=\"m_nav_div_img\"\n" +
                                             "                 src=\"" + photourl + "item_search.png\" style=\" width: 12px;\n" +
                                             "            height: 12px;\n" +
                                             "            margin: 0px 6px;\">\n" +
-                                            "            <div class=\"jcz_qcc_nav_div_title\" style=\" color: #0077FF;\n" +
+                                            "            <div class=\"m_nav_div_title\" style=\" color: #0077FF;\n" +
                                             "            font-size: 12px;\">查淘客\n" +
                                             "            </div>\n" +
                                             "        </div>\n";
                                         <!--无淘客佣金-->
-                                        let wutaoke = "<div id='jcz_qcc_nav_div_wtk' class='jcz_qcc_nav_div_wtk' style=\"margin: -15px 0px;\n" +
+                                        let wutaoke = "<div id='m_nav_div_wtk' class='m_nav_div_wtk' style=\"margin: -15px 0px;\n" +
                                             "            padding: 14px 0px 15px;\n" +
                                             "            width: 114px;\n" +
                                             "            position: relative;\n" +
@@ -432,7 +432,7 @@ if (jcz_qcc_sold_item_isCc) {
                                             "            </div>\n" +
                                             "        </div>\n";
                                         let shiyongtaoke = "        <!--使用了淘客-->\n" +
-                                            "        <div id='jcz_qcc_nav_div_sytk' class='jcz_qcc_nav_div_sytk' style=\"margin: -15px 0px;\n" +
+                                            "        <div id='m_nav_div_sytk' class='m_nav_div_sytk' style=\"margin: -15px 0px;\n" +
                                             "            padding: 14px 0px 15px;\n" +
                                             "            width: 114px;\n" +
                                             "            position: relative;\n" +
@@ -466,20 +466,20 @@ if (jcz_qcc_sold_item_isCc) {
                                             break
                                         }
                                     }
-                                })
+                                });
 
                                 let $listitem = $(biaojiclass);
                                 //1遍历旺旺对应的数据插入
                                 for (let i = 0; i < $listitem.length; i++) {
                                     for (let item of data.data.wangwang_list) {
-                                        let appendhtml = '<div class=\"jcz_qcc_bj_all_box\" style=\"flex-direction: column;align-items: center;display: flex\">';
+                                        let appendhtml = '<div class=\"m_bj_all_box\" style=\"flex-direction: column;align-items: center;display: flex\">';
                                         //标记条数
                                         if (item.count > 0) {
-                                            appendhtml = appendhtml + '<span class="jcz_qcc_bjsize" style=\"color: #FF0000;font-size: 12px;line-height: 13px;border-bottom: solid 1px #FF0000;cursor:pointer; margin-bottom: 5px\">' + item.count + '条标记</span>\n';
+                                            appendhtml = appendhtml + '<span class="m_bjsize" style=\"color: #FF0000;font-size: 12px;line-height: 13px;border-bottom: solid 1px #FF0000;cursor:pointer; margin-bottom: 5px\">' + item.count + '条标记</span>\n';
                                         } else {
                                             appendhtml = appendhtml + '<span style=\"color:#CCCCCC;font-size: 12px;margin-bottom: 5px\">暂无标记</span>\n';
                                         }
-                                        appendhtml = appendhtml + '<div class="jcz_qcc_bjbox" style= "display: flex;\n' +
+                                        appendhtml = appendhtml + '<div class="m_bjbox" style= "display: flex;\n' +
                                             "        border-radius: 2px;" +
                                             "        flex-direction: row;" +
                                             "        align-items: center;" +
@@ -530,7 +530,7 @@ if (jcz_qcc_sold_item_isCc) {
                  */
 
                 //查信誉
-                $('.jcz_qcc_nav_div_cxy').unbind().click(function () {
+                $('.m_nav_div_cxy').unbind().click(function () {
                     let parents = $(this).parents("div[class^='item-mod__trade-order___']");
                     //拿到标题
                     let wangwang = parents.find("a[class^='buyer-mod__name___']").text();
@@ -542,7 +542,7 @@ if (jcz_qcc_sold_item_isCc) {
                     sold_list_utils.openSearchwwDialog(0, wangwang, order_num, create_time, paynum, order_img, order_title);
                 })
                 //查淘客
-                $('.jcz_qcc_nav_div_ctk').unbind().click(function () {
+                $('.m_nav_div_ctk').unbind().click(function () {
                     //拿到标题
                     let parents = $(this).parents("div[class^='item-mod__trade-order___']");
                     //拿到标题
@@ -558,7 +558,7 @@ if (jcz_qcc_sold_item_isCc) {
             },
             //添加标记点击事件
             addbiaojiClick: function () {
-                $('.jcz_qcc_bjsize').unbind().click(function () {
+                $('.m_bjsize').unbind().click(function () {
                     //拿到标题
                     let parents = $(this).parents("div[class^='item-mod__trade-order___']");
                     //拿到标题
@@ -570,7 +570,7 @@ if (jcz_qcc_sold_item_isCc) {
                     let order_title = parents.find("td[class^='sol-mod__no-br___']").find('div').eq(2).find('a').eq(0).text();
                     sold_list_utils.openSearchwwDialog(0, wangwang, order_num, create_time, paynum, order_img, order_title);
                 })
-                $('.jcz_qcc_bjbox').unbind().click(function () {
+                $('.m_bjbox').unbind().click(function () {
                     //拿到标题
                     let parents = $(this).parents("div[class^='item-mod__trade-order___']");
                     //拿到标题
@@ -585,7 +585,7 @@ if (jcz_qcc_sold_item_isCc) {
 
                 //设置点击事件
                 //使用了淘客
-                $('.jcz_qcc_nav_div_sytk').unbind().click(function () {
+                $('.m_nav_div_sytk').unbind().click(function () {
                     //拿到标题
                     let parents = $(this).parents("div[class^='item-mod__trade-order___']");
                     //拿到标题
@@ -598,7 +598,7 @@ if (jcz_qcc_sold_item_isCc) {
                     sold_list_utils.openSearchwwDialog(1, wangwang, order_num, create_time, paynum, order_img, order_title);
                 })
                 //无淘客
-                $('.jcz_qcc_nav_div_wtk').unbind().click(function () {
+                $('.m_nav_div_wtk').unbind().click(function () {
                     //拿到标题
                     let parents = $(this).parents("div[class^='item-mod__trade-order___']");
                     //拿到标题
@@ -758,30 +758,30 @@ if (jcz_qcc_sold_item_isCc) {
                 }
                 let url = sold_list_utils.getServerurl("");
                 var scroll_html = ` <div style='position:relative;display: flex;flex-direction: row;border: solid #E6E6E6 1px;margin-top: 7px;margin-bottom: 5px;'
-                                         class="jcz_qcc_scroll_label">
+                                         class="m_scroll_label">
                                         <!--左边-->
                                         <div style="width: 250px;height: 56px;display: flex;flex-direction: row;align-items: center;border-right: solid #E6E6E6 1px;">
-                                            <img src="` + url + `logo_qcc.png"
+                                            <img src="` + url + `logo.png"
                                                  style="width:108px;height: 31px;margin-right: 21px;margin-left: 14px">
-                                            <div class="jcz_qcc_scroll_seller_help"
+                                            <div class="m_scroll_seller_help"
                                                  style="display: flex;align-items: center;flex-direction: row;position: relative;cursor: pointer">
                                                 <img src="` + url + `erweima.png"
                                                      style="width:14px;height: 14px;margin-right: 7px">
                                                 <span style="font-size: 12px;color: #333333">商家互助群</span>
                                                 <!--悬浮二维码-->
-                                                <div id="jcz_qcc_scroll_erweima_box"
+                                                <div id="m_scroll_erweima_box"
                                                      style="width: 168px;height: auto;align-items: center;justify-content: center;display: none; background-color: #fff;border-radius: 1px;box-shadow:0px 3px 6px rgba(0,0,0,0.16);position: absolute;top: 38px;left: -35px;">
-                                                    <img id="jcz_qcc_scroll_erweima_img" src="" style="width: 149px;height: 149px;margin: 10px">
+                                                    <img id="m_scroll_erweima_img" src="" style="width: 149px;height: 149px;margin: 10px">
                                                 </div>
                                             </div>
                                         </div>
                                         <!--中间-->
                                         <div style="display: flex;flex: 1;flex-direction: column;justify-content: center; border-right: solid #E6E6E6 1px;">
                                             <div style="display: flex;flex-direction: row;align-items: center;height: 20px;">
-                                                <img class="jcz_qcc_dowebok_notice_icon"
+                                                <img class="m_dowebok_notice_icon"
                                                      src="` + url + `laba.png"
                                                      style="padding-left: 13px;height: 15px">
-                                                <div class="jcz_qcc_dowebok_notice"
+                                                <div class="m_dowebok_notice"
                                                      style="flex: 1;height: 100%;margin-left: 5px;line-height: 20px;overflow: hidden;">
                                                     <ul>
                                                     </ul>
@@ -789,7 +789,7 @@ if (jcz_qcc_sold_item_isCc) {
                                             </div>
                                     
                                             <!--被标记数据-->
-                                            <div class="jcz_qcc_dowebok_sign"
+                                            <div class="m_dowebok_sign"
                                                  style="height: 16px; margin-left: 13px;margin-top: 7px; line-height: 16px;overflow: hidden;">
                                                 <ul>
                                                 </ul>
@@ -802,10 +802,10 @@ if (jcz_qcc_sold_item_isCc) {
                                                      style="width: 12px;height: 12px;margin-right: 5px">
                                                 <span style="font-size: 12px;color: #333333">当页标记汇总：</span>
                                             </div>
-                                            <span style="font-size: 12px;color: #999999;font-weight: bold" class="jcz_qcc_report_times">暂无</span>
+                                            <span style="font-size: 12px;color: #999999;font-weight: bold" class="m_report_times">暂无</span>
                                         </div>
                                     </div>`;
-                $('.jcz_qcc_scroll_label').remove();
+                $('.m_scroll_label').remove();
                 $("div[class^=tabs-mod__main___]").after(scroll_html);
 
                 //获取公告信息
@@ -824,8 +824,8 @@ if (jcz_qcc_sold_item_isCc) {
                         let sign_ist = data.data.sign_ist;
 
                         if (num) {
-                            $('.jcz_qcc_report_times').html(num + '条');
-                            $('.jcz_qcc_report_times').css({
+                            $('.m_report_times').html(num + '条');
+                            $('.m_report_times').css({
                                 color: 'red',
                                 textDecoration: 'underline',
                             });
@@ -834,16 +834,16 @@ if (jcz_qcc_sold_item_isCc) {
                             sold_list_utils.showBjhz();
                         });
                         if (notice_ist.length <= 0) {
-                            $('.jcz_qcc_dowebok_notice_icon').remove();
+                            $('.m_dowebok_notice_icon').remove();
                         } else {
                             //赋值滚动列表数据
                             for (let i = 0; i < notice_ist.length; i++) {
                                 if (notice_ist[i].href) {
-                                    $('.jcz_qcc_dowebok_notice').find('ul').eq(0).prepend(
+                                    $('.m_dowebok_notice').find('ul').eq(0).prepend(
                                         '<li ><a target="_blank" href=" ' + notice_ist[i].href + ' " style="color: #5D5D5D">' + notice_ist[i].title + '</a></li>'
                                     );
                                 } else {
-                                    $('.jcz_qcc_dowebok_notice').find('ul').eq(0).prepend(
+                                    $('.m_dowebok_notice').find('ul').eq(0).prepend(
                                         '<li ><a   style="color: #5D5D5D">' + notice_ist[i].title + '</a></li>'
                                     );
                                 }
@@ -852,7 +852,7 @@ if (jcz_qcc_sold_item_isCc) {
 
 
                         for (let i = 0; i < sign_ist.length; i++) {
-                            $('.jcz_qcc_dowebok_sign').find('ul').eq(0).prepend(
+                            $('.m_dowebok_sign').find('ul').eq(0).prepend(
                                 '<a target="_blank" href="' + sign_ist[i].href + '">' +
                                 '<li style="height:16px;line-height:16px;color:#000;font-size: 12px;display: flex;flex-direction: row;' +
                                 '">' +
@@ -864,17 +864,17 @@ if (jcz_qcc_sold_item_isCc) {
 
                         //鼠标的移入移出
                         if (data.data.qrcode) {
-                            $('#jcz_qcc_scroll_erweima_img').attr('src', data.data.qrcode)
-                            $(".jcz_qcc_scroll_seller_help").mouseover(function () {
-                                $("#jcz_qcc_scroll_erweima_box").css('display', 'flex');
+                            $('#m_scroll_erweima_img').attr('src', data.data.qrcode)
+                            $(".m_scroll_seller_help").mouseover(function () {
+                                $("#m_scroll_erweima_box").css('display', 'flex');
                             }).mouseout(function () {
-                                $("#jcz_qcc_scroll_erweima_box").css('display', 'none');
+                                $("#m_scroll_erweima_box").css('display', 'none');
                             });
                         }
 
                         setTimeout(() => {
-                            sold_list_utils.rollingSign('.jcz_qcc_dowebok_sign')
-                            sold_list_utils.rollingNotice('.jcz_qcc_dowebok_notice')
+                            sold_list_utils.rollingSign('.m_dowebok_sign')
+                            sold_list_utils.rollingNotice('.m_dowebok_notice')
                         }, 500)
                     }
                 );
@@ -890,10 +890,10 @@ if (jcz_qcc_sold_item_isCc) {
                     if (data.ok) {
                         if (data.data.close_tbk_query == 0) {
                             let imgurl = sold_list_utils.getServerurl('plcx_img.png');
-                            var searchAllhtml = '<img src="' + imgurl + '" id="jcz_qcc_search_all_img" style="width: 133px;height: 24px;margin-right: 10px;cursor: pointer">';
+                            var searchAllhtml = '<img src="' + imgurl + '" id="m_search_all_img" style="width: 133px;height: 24px;margin-right: 10px;cursor: pointer">';
                             $(searchAllclass).prepend(searchAllhtml);
                             $(searchAllclass).css('display', 'flex');
-                            $('#jcz_qcc_search_all_img').unbind().click(function () {
+                            $('#m_search_all_img').unbind().click(function () {
                                 sold_list_utils.searchAllTk();
                             });
                         } else {
@@ -911,16 +911,16 @@ if (jcz_qcc_sold_item_isCc) {
                     sold_list_utils.initPlch();
                     sold_list_utils.initBjbox();
                     //点击灰色部分关闭
-                    $('.jcz_qcc_changesold_list_float').unbind().click(function () {
-                        $('.jcz_qcc_changesold_list_float').css('display', 'none');
+                    $('.m_changesold_list_float').unbind().click(function () {
+                        $('.m_changesold_list_float').css('display', 'none');
                     });
-                    $('#jcz_qcc_changesold_float_right_login_box').unbind().click(function () {
+                    $('#m_changesold_float_right_login_box').unbind().click(function () {
                         event.stopPropagation();
                     });
-                    $('#jcz_qcc_changesold_float_plcx_box').unbind().click(function () {
+                    $('#m_changesold_float_plcx_box').unbind().click(function () {
                         event.stopPropagation();
                     });
-                    $('#jcz_qcc_changesold_float_allbj_box').unbind().click(function () {
+                    $('#m_changesold_float_allbj_box').unbind().click(function () {
                         event.stopPropagation();
                     });
 
@@ -930,7 +930,7 @@ if (jcz_qcc_sold_item_isCc) {
             //初始化登录js
             initLoginJs: function () {
                 changesoldlist_rightlogin = new Vue({
-                    el: '#jcz_qcc_changesold_float_right_login_box',
+                    el: '#m_changesold_float_right_login_box',
                     data: {
                         isshow: false,
                         phone: '',
@@ -1005,7 +1005,7 @@ if (jcz_qcc_sold_item_isCc) {
             //初始化批量查询js
             initPlch: function () {
                 changesoldlist_plcx = new Vue({
-                    el: '#jcz_qcc_changesold_float_plcx_box',
+                    el: '#m_changesold_float_plcx_box',
                     data: {
                         isshow: false,
                         list: [],
@@ -1044,7 +1044,7 @@ if (jcz_qcc_sold_item_isCc) {
                         },
                         searchTbk: function (index) {
                             //隐藏当前
-                            $('.jcz_qcc_changesold_list_float').css('display', 'none');
+                            $('.m_changesold_list_float').css('display', 'none');
                             //拿到标题
                             let parents = $("div[class^='item-mod__trade-order___']").eq(index);
                             //拿到标题
@@ -1128,7 +1128,7 @@ if (jcz_qcc_sold_item_isCc) {
                         refushTbList: function (list) {
                             let html = '';
                             <!--无淘客佣金-->
-                            let wutaoke = "<div id='jcz_qcc_nav_div_wtk' class='jcz_qcc_nav_div_wtk' style=\"margin: -15px 0px;\n" +
+                            let wutaoke = "<div id='m_nav_div_wtk' class='m_nav_div_wtk' style=\"margin: -15px 0px;\n" +
                                 "            padding: 14px 0px 15px;\n" +
                                 "            width: 114px;\n" +
                                 "            position: relative;\n" +
@@ -1143,7 +1143,7 @@ if (jcz_qcc_sold_item_isCc) {
                                 "            </div>\n" +
                                 "        </div>\n";
                             let shiyongtaoke = "        <!--使用了淘客-->\n" +
-                                "        <div id='jcz_qcc_nav_div_sytk' class='jcz_qcc_nav_div_sytk' style=\"margin: -15px 0px;\n" +
+                                "        <div id='m_nav_div_sytk' class='m_nav_div_sytk' style=\"margin: -15px 0px;\n" +
                                 "            padding: 14px 0px 15px;\n" +
                                 "            width: 114px;\n" +
                                 "            position: relative;\n" +
@@ -1158,7 +1158,7 @@ if (jcz_qcc_sold_item_isCc) {
                                 "            </div>\n" +
                                 "        </div>\n";
                             //拿到所有查询的淘宝列表item
-                            let parentitem = $('.jcz_qcc_nav_div_ctk').parents("div[class^='item-mod__trade-order___']");
+                            let parentitem = $('.m_nav_div_ctk').parents("div[class^='item-mod__trade-order___']");
                             for (let i = 0; i < parentitem.length; i++) {
                                 //获取每个item 下面的旺旺 和订单号
                                 let ordernum = parentitem.eq(i).find(pushitenrightcalss).find('span')[2].innerHTML;
@@ -1175,11 +1175,11 @@ if (jcz_qcc_sold_item_isCc) {
                                                 html = shiyongtaoke;
                                             }
                                             //判断是否有查淘客按钮 防止重复添加
-                                            if (parentitem.eq(i).find('#jcz_qcc_nav_div_ctk').length > 0) {
+                                            if (parentitem.eq(i).find('#m_nav_div_ctk').length > 0) {
                                                 //删除查淘客按钮
-                                                parentitem.eq(i).find('#jcz_qcc_nav_div_ctk').remove();
+                                                parentitem.eq(i).find('#m_nav_div_ctk').remove();
                                                 //添加对应的html
-                                                parentitem.eq(i).find('.jcz_qcc_header_right').append(html);
+                                                parentitem.eq(i).find('.m_header_right').append(html);
                                             }
 
                                         }
@@ -1203,12 +1203,12 @@ if (jcz_qcc_sold_item_isCc) {
                                 let is_tbk = -2;//  0非淘宝客订单 1淘宝客订单 -1查询失败 -2等待查询
                                 //有查淘客这个按钮 判断是否查询过
                                 let is_canselect;
-                                if (item.eq(i).find('.jcz_qcc_nav_div_ctk').length > 0) {
+                                if (item.eq(i).find('.m_nav_div_ctk').length > 0) {
                                     is_canselect = 1;//-1不能选 0没选中 1选中
                                 } else {
                                     is_canselect = -1;//-1不能选 0没选中 1选中
                                     //判断查询的状态
-                                    if (item.eq(i).find('.jcz_qcc_nav_div_wtk').length > 0) { //无淘客
+                                    if (item.eq(i).find('.m_nav_div_wtk').length > 0) { //无淘客
                                         is_tbk = 0;
                                     } else {
                                         is_tbk = 1;
@@ -1264,7 +1264,7 @@ if (jcz_qcc_sold_item_isCc) {
             //当页标记汇总
             initBjbox: function () {
                 changesoldlist_allbj = new Vue({
-                    el: '#jcz_qcc_changesold_float_allbj_box',
+                    el: '#m_changesold_float_allbj_box',
                     data: {
                         isshow: false,
                         list: [],
@@ -1323,13 +1323,13 @@ if (jcz_qcc_sold_item_isCc) {
             },
             //显示登录框
             showLogin: function () {
-                $('.jcz_qcc_changesold_list_float').css('display', 'flex');
+                $('.m_changesold_list_float').css('display', 'flex');
                 changesoldlist_rightlogin.isshow = true;
                 changesoldlist_plcx.isshow = false;
             },
             //显示批量查询
             showPlcx: function () {
-                $('.jcz_qcc_changesold_list_float').css('display', 'flex');
+                $('.m_changesold_list_float').css('display', 'flex');
                 changesoldlist_rightlogin.isshow = false;
                 changesoldlist_plcx.isshow = true;
                 changesoldlist_plcx.is_select_all = 1;
@@ -1338,8 +1338,8 @@ if (jcz_qcc_sold_item_isCc) {
             },
             //显示标记汇总
             showBjhz: function () {
-                $('.jcz_qcc_changesold_list_float').css('display', 'flex');
-                $('#jcz_qcc_changesold_float_allbj_box').css('display', 'flex');
+                $('.m_changesold_list_float').css('display', 'flex');
+                $('#m_changesold_float_allbj_box').css('display', 'flex');
                 changesoldlist_allbj.isshow = true;
             },
 
@@ -1500,28 +1500,28 @@ if (jcz_qcc_sold_item_isCc) {
                     chrome.extension.sendMessage({type: 9}, (result) => {
                         if (!result) {
                             //判断今天是否提醒过
-                            let saveupdatatime = localStorage.getItem('jcz_qcc_checkupdatatime', sold_list_utils.getdatstartTime());
+                            let saveupdatatime = localStorage.getItem('m_checkupdatatime', sold_list_utils.getdatstartTime());
                             //今天的起点时间 是否大于存储的时间
                             if (sold_list_utils.getdatstartTime() > saveupdatatime) {
-                                $('.jcz_qcc_upgrade').css('display', 'flex');
+                                $('.m_upgrade').css('display', 'flex');
                                 //禁止时间冒泡
-                                $('#jcz_qcc_upgrade_content').unbind().click(function () {
+                                $('#m_upgrade_content').unbind().click(function () {
                                     event.stopPropagation();
                                 });
                                 //去官网
-                                $('#jcz_qcc_upgrade_go').unbind().click(function () {
+                                $('#m_upgrade_go').unbind().click(function () {
                                     window.open(baseUrl + 'home/download');
-                                    $('.jcz_qcc_upgrade').css('display', 'none');
+                                    $('.m_upgrade').css('display', 'none');
                                 });
                                 //隐藏
-                                $('#jcz_qcc_upgrade_cancle').unbind().click(function () {
-                                    $('.jcz_qcc_upgrade').css('display', 'none');
+                                $('#m_upgrade_cancle').unbind().click(function () {
+                                    $('.m_upgrade').css('display', 'none');
                                 });
                                 //隐藏
-                                $('.jcz_qcc_upgrade').unbind().click(function () {
-                                    $('.jcz_qcc_upgrade').css('display', 'none');
+                                $('.m_upgrade').unbind().click(function () {
+                                    $('.m_upgrade').css('display', 'none');
                                 });
-                                localStorage.setItem('jcz_qcc_checkupdatatime', sold_list_utils.getdatstartTime());
+                                localStorage.setItem('m_checkupdatatime', sold_list_utils.getdatstartTime());
                             }
                         }
                     });
@@ -1537,7 +1537,7 @@ if (jcz_qcc_sold_item_isCc) {
                 return time
             }
 
-        }
+        };
         // 获取uid token
         chrome.extension.sendMessage({type: 3}, (result) => {
             uid = result.uid;

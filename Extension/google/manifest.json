@@ -20,7 +20,7 @@
         "js/m_aes.js",
         "js/m_url.js",
         "js/m_mode-ecb.js",
-        "js/m_changesoldlist.js"
+        "js/m_init.js"
       ],
       "run_at": "document_end",
       "all_frames": true
@@ -35,6 +35,7 @@
       "js/m_axios.js",
       "js/m_aes.js",
       "js/m_mode-ecb.js",
+      "js/m_url.js",
       "js/background.js"
     ]
   },
