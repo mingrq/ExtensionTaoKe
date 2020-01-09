@@ -22,11 +22,11 @@ else {
 
         //这个地方只写测试 未来放到服务器上直接下载下来
         var errorww_urls = {
-            report: err_baseUrl + 'plug/punish/report',//上报违规记录
-            get_punish: err_baseUrl + 'plug/punish/get_punish',//获取单个违规记录
-            report_order: err_baseUrl + 'plug/punish/report/order',//上报违规订单
-            get_order: err_baseUrl + 'plug/punish/get_order',//获取单个订单
-            report_info: err_baseUrl + 'plug/punish/report/info',//获取单个订单
+            report: err_baseUrl + 'extension/plug/punish/report',//上报违规记录
+            get_punish: err_baseUrl + 'extension/plug/punish/get_punish',//获取单个违规记录
+            report_order: err_baseUrl + 'extension/plug/punish/report/order',//上报违规订单
+            get_order: err_baseUrl + 'extension/plug/punish/get_order',//获取单个订单
+            report_info: err_baseUrl + 'extension/plug/punish/report/info',//获取单个订单
         }
 
 
@@ -329,7 +329,7 @@ else {
 
             //获取服务器地址方便后期改
             getServerurl: function (url) {
-                return err_baseUrl + 'assets/plug/' + url
+                return err_baseUrl + 'extension/assets/plug/' + url
             },
             Net: function (parms, getresponse) {
                 axios({

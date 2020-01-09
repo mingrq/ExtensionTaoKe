@@ -343,7 +343,7 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
         case 1://根据对应的页面去请求js
             $.ajax({
                 type: "POST",
-                url: baseServerUrl+'plug/index/initJs.php',
+                url: baseServerUrl+'extension/plug/index/initJs.php',
                 data: {href: request.href},
                 dataType: 'json',
                 async: true,

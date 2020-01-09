@@ -21,25 +21,25 @@ else {
     if (m_dialog_href && m_dialog_href == m_dialog_topHref) {
         let dialogbaseUrl = baseServerUrl; //网络请求地址
         let dialogUrl = {
-            red_dot: dialogbaseUrl + 'plug/buyer/red_dot',
-            reputation: dialogbaseUrl + 'plug/buyer/reputation',
-            buyer_drops: dialogbaseUrl + 'plug/buyer/drops/',//降权记录
-            wangwang_info: dialogbaseUrl + 'plug/buyer/wangwang_info',
-            complaints: dialogbaseUrl + 'plug/buyer/complaints',
-            advert: dialogbaseUrl + 'advert/index/advert',
-            complaint: dialogbaseUrl + 'plug/buyer/complaint',
-            login: dialogbaseUrl + 'plug/index/login',
+            red_dot: dialogbaseUrl + 'extension/plug/buyer/red_dot',
+            reputation: dialogbaseUrl + 'extension/plug/buyer/reputation',
+            buyer_drops: dialogbaseUrl + 'extension/plug/buyer/drops/',//降权记录
+            wangwang_info: dialogbaseUrl + 'extension/plug/buyer/wangwang_info',
+            complaints: dialogbaseUrl + 'extension/plug/buyer/complaints',
+            advert: dialogbaseUrl + 'extension/advert/index/advert',
+            complaint: dialogbaseUrl + 'extension/plug/buyer/complaint',
+            login: dialogbaseUrl + 'extension/plug/index/login',
             isSBupload: dialogbaseUrl + 'upload',
-            sign: dialogbaseUrl + 'plug/buyer/sign',
-            sign_info: dialogbaseUrl + 'plug/buyer/sign_info',
-            user_info: dialogbaseUrl + 'plug/index/info',
-            tbk_info: dialogbaseUrl + 'plug/buyer/tbk_info',
-            tbk_img: dialogbaseUrl + 'plug/buyer/tbk_img',
-            share: dialogbaseUrl + 'plug/buyer/share',
-            upload: dialogbaseUrl + 'upload',
-            active_qrcode: dialogbaseUrl + 'plug/buyer/active_qrcode',
-            advert_ckick: dialogbaseUrl + 'advert/index/click',
-            collection_phone: dialogbaseUrl + 'plug/buyer/collection_phone',
+            sign: dialogbaseUrl + 'extension/plug/buyer/sign',
+            sign_info: dialogbaseUrl + 'extension/plug/buyer/sign_info',
+            user_info: dialogbaseUrl + 'extension/plug/index/info',
+            tbk_info: dialogbaseUrl + 'extension/plug/buyer/tbk_info',
+            tbk_img: dialogbaseUrl + 'extension/plug/buyer/tbk_img',
+            share: dialogbaseUrl + 'extension/plug/buyer/share',
+            upload: dialogbaseUrl + 'extension/upload',
+            active_qrcode: dialogbaseUrl + 'extension/plug/buyer/active_qrcode',
+            advert_ckick: dialogbaseUrl + 'extension/advert/index/click',
+            collection_phone: dialogbaseUrl + 'extension/plug/buyer/collection_phone',
         };
 
         let dialog_seller_wangwang = '';
@@ -1056,7 +1056,7 @@ else {
             },
             //获取服务器地址方便后期改
             getServerurl: function (url) {
-                return dialogbaseUrl + 'app/public/assets/plug/' + url
+                return dialogbaseUrl + 'extension/app/public/assets/plug/' + url
             },
             //获取本地存储的旺旺
             getLocalSearchWW: function () {
@@ -2094,7 +2094,7 @@ else {
                     methods: {
                         getTbimg: function () {
                             if (rightTwo) {
-                                return dialogbaseUrl + 'plug/buyer/tbk_img?order_num=' + rightTwo.order_info.order_num;
+                                return dialogbaseUrl + 'extension/plug/buyer/tbk_img?order_num=' + rightTwo.order_info.order_num;
                             }
                         },
                         jumFxzl: function () {

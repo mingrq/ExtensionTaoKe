@@ -25,12 +25,12 @@ if (m_sold_item_href == m_sold_item_topHref) {
     let searchAllclass = "div[class^=simple-pagination-mod__container___]"; //搜索全部class
 
     let sold_list_urls = {
-        upload_wangwang: baseUrl + 'plug/index/upload_wangwang.php',
-        init_list: baseUrl + 'plug/index/init_list.php',
-        init_notice: baseUrl + 'plug/index/notice.php',
-        login: baseUrl + 'plug/index/login.php',
-        user_info: baseUrl + 'plug/index/info.php',
-        batch_tbk_info: baseUrl + 'plug/buyer/batch_tbk_info.php',
+        upload_wangwang: baseUrl + 'extension/plug/index/upload_wangwang.php',
+        init_list: baseUrl + 'extension/plug/index/init_list.php',
+        init_notice: baseUrl + 'extension/plug/index/notice.php',
+        login: baseUrl + 'extension/plug/index/login.php',
+        user_info: baseUrl + 'extension/plug/index/info.php',
+        batch_tbk_info: baseUrl + 'extension/plug/buyer/batch_tbk_info.php',
     };
 
     let loginhtml = `
@@ -1331,7 +1331,7 @@ if (m_sold_item_href == m_sold_item_topHref) {
 
         //获取服务器地址方便后期改
         getServerurl: function (url) {
-            return baseUrl + 'app/public/assets/plug/' + url
+            return baseUrl + 'extension/app/public/assets/plug/' + url
         },
 
         /**
