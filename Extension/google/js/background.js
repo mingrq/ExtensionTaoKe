@@ -343,13 +343,13 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
         case 1://根据对应的页面去请求js
             $.ajax({
                 type: "POST",
-                // url: 'https://www.zhangguishuo.net/plug/index/initJs',
-                // url: 'http://47.99.76.134:7001/plug/index/initJs',
                 url: baseServerUrl+'plug/index/initJs.php',
                 data: {href: request.href},
                 dataType: 'json',
                 async: true,
                 success: function (msg) {
+                    console.log("msg");
+                    console.log(msg);
                     if (msg.data.length == 0) return;
                     //请求js后将js传给对应的页面去插入(解决页面里面网络请求回来不能插入js的问题)
                     //传回来的脚本里面包含请求html的js
