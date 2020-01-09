@@ -1,0 +1,165 @@
+header {
+    width: 100%;
+    min-width: 1200px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.09);
+}
+
+
+.header-view-title span {
+    color: #F8654F;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+
+.header-div {
+    width: 1200px;
+    min-width: 1200px;
+    height: 60px;
+}
+
+.header-div-sumbit-login {
+    width: 80px;
+    height: 32px;
+    background: rgba(255, 119, 61, 1);
+    border-radius: 2px;
+    text-align: center;
+    line-height: 32px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 1);
+}
+
+.header-div-jump {
+    color: #333333 !important;
+    font-size: 14px;
+    padding: 0px 20px;
+}
+
+.header-div-left {
+    justify-content: space-around;
+    line-height: 60px;
+}
+
+.header-div-right {
+    margin-left: 20px;
+    padding-right: 24px;
+    height: 100%;
+}
+
+
+.header_main-home-search {
+    border-radius: 4px;
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.06);
+    height: 34px;
+    position: relative;
+    width: 380px;
+    margin-left: 20px;
+    display: flex;
+    flex: 1;
+    align-items: center;
+}
+
+.header_home-search-input {
+    margin-left: 12px;
+    margin-right: 12px;
+    flex: 1;
+    height: 20px;
+    line-height: 20px;
+    border: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.header_home-search-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #CCCCCC;
+    font-size: 14px;
+}
+
+.header_home-search-input:-moz-placeholder, textarea:-moz-placeholder {
+    color: #CCCCCC;
+    font-size: 14px;
+}
+
+.header_home-search-input::-moz-placeholder, textarea::-moz-placeholder {
+    color: #CCCCCC;
+    font-size: 14px;
+}
+
+.header_home-search-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    color: #CCCCCC;
+    font-size: 14px;
+}
+
+
+.header_main-home-search-button {
+    width: 56px;
+    height: 36px;
+    background: rgba(248, 101, 79, 1);
+    border-radius: 0px 4px 4px 0px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 1);
+}
+
+.person_info {
+    height: 100%;
+    font-size: 14px;
+    font-family: Microsoft YaHei;
+    line-height: 19px;
+    color: rgba(248, 101, 79, 1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.person_panel {
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(230, 230, 230, 1);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.03);
+    opacity: 1;
+    border-radius: 2px;
+    position: absolute;
+    top: 58px;
+    width: 163px;
+    display: none
+}
+
+.person_panel_phone {
+    font-size: 14px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    line-height: 19px;
+    color: rgba(51, 51, 51, 1);
+}
+
+.person_panel_coin {
+    font-size: 14px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    line-height: 19px;
+    color: rgba(255, 167, 78, 1);
+}
+
+
+.simditor {
+    border-top: 0px !important;
+    border-left: 0px solid #f1f1f1 !important;
+    border-right: 0px solid #f1f1f1 !important;
+    border-bottom: 0px solid #f1f1f1 !important;
+    width: 798px !important;
+    margin: 0px 0px !important;
+}
+
+.simditor-body {
+    min-height: 0px !important;
+}
+
+
+.header_hover:hover {
+    color: #FF773D;
+}

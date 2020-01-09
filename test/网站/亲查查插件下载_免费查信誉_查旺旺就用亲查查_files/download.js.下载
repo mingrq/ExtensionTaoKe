@@ -1,0 +1,86 @@
+var _this = null;
+window.onload = function () {
+    var vm = new Vue({
+        el: '.container',
+        data: function () {
+            return {
+                browser: 0,
+                browser_list: [
+                    {
+                        id:1,
+                        img: '/assets/home/download/download_2.png',
+                        name: '360极速浏览器',
+                        mp4: 'https://qinchacha.oss-cn-hangzhou.aliyuncs.com/mp4/360_js_temp.mp4',
+                        down_url: '/home/download_crx?platform=2'
+                    },
+                    {
+                        id:2,
+                        img: '/assets/home/download/download_3.png',
+                        name: '360安全浏览器',
+                        mp4: 'https://qinchacha.oss-cn-hangzhou.aliyuncs.com/mp4/360_aq_temp.mp4',
+                        down_url: '/home/download_crx?platform=3'
+                    },
+                    {
+                        id:3,
+                        img: '/assets/home/download/download_4.png',
+                        name: '猎豹浏览器',
+                        mp4: 'https://qinchacha.oss-cn-hangzhou.aliyuncs.com/mp4/liebao.mp4',
+                        down_url: '/home/download_crx?platform=4'
+                    },
+                    {
+                        id:4,
+                        img: '/assets/home/download/download_5.png',
+                        name: 'UC浏览器',
+                        mp4: 'https://qinchacha.oss-cn-hangzhou.aliyuncs.com/mp4/UC.mp4',
+                        down_url: '/home/download_crx?platform=5'
+                    },
+                    {
+                        id:5,
+                        img: '/assets/home/download/download_0.png',
+                        name: 'QQ浏览器',
+                        mp4: 'https://qinchacha.oss-cn-hangzhou.aliyuncs.com/mp4/QQ.mp4',
+                        down_url: '/home/download_crx?platform=0'
+                    },
+                    {
+                        id:6,
+                        img: '/assets/home/download/download_1.png',
+                        name: '谷歌浏览器',
+                        mp4: 'https://qinchacha.oss-cn-hangzhou.aliyuncs.com/mp4/google.mp4',
+                        down_url: '/home/download_crx?platform=1'
+                    },
+                    {
+                        id:7,
+                        img: '/assets/home/download/download_6.png',
+                        name: '2345浏览器',
+                        mp4: 'https://qinchacha.oss-cn-hangzhou.aliyuncs.com/mp4/2345.mp4',
+                        down_url: '/home/download_crx?platform=6'
+                    },
+                ]
+            }
+        },
+        methods: {
+            choseBrowser: function (index) {
+                _this.browser = index;
+                //切花视频播放资源
+                // var myVideo = document.getElementById('video');
+                //设置资源
+                $("#video").attr("src", _this.browser_list[index].mp4);
+                //s设置播放进度
+                // myVideo.currentTime(0);
+            },
+            //下载插件
+            crxDownLoad: function (index) {
+                let url = _this.browser_list[index].down_url;
+                return url || downLoadCrx;
+            }
+        },
+        created: function () {
+            _this = this;
+            _this.choseBrowser(0)
+        },
+        mounted: function () {
+
+        },
+    });
+
+}

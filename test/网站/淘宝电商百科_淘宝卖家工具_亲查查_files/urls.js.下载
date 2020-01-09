@@ -1,0 +1,29 @@
+var baseUrl = '/';
+
+var homeView = baseUrl + 'home/index/index';//官网首页
+var loginView = baseUrl + 'home/index/v/login';//登录界面
+var postLogin = baseUrl + 'home/index/login';//登录
+var getLogout = baseUrl + 'home/index/logout';//退出登录
+var postRegist = baseUrl + 'home/index/regist';//注册
+var getVery_code = baseUrl + 'home/index/very_code';//获取短信验证码
+var postBack = baseUrl + 'home/index/back';//账号密码找回
+var uploadFile = baseUrl + 'upload';//上传文件
+
+var downLoadCrx = baseUrl + 'home/download_crx';//下载插件
+var complaintList = baseUrl + 'home/buyer/complaint/list';//吐槽列表
+var complaintWangWang = baseUrl + 'home/buyer/complaint';//吐槽
+var orderList =baseUrl+'home/buyer/drops/';//获取标记订单
+var signWangWang = baseUrl + 'home/buyer/sign';//标记
+var advertClick = baseUrl + 'advert/index/click';//广告点击事件
+var getAdvert = baseUrl + 'advert/index/advert';//获取广告
+
+var setWeixinQQ = baseUrl + 'home/customer/set_wx_qq';//修改微信QQ信息
+var coinList = baseUrl + 'home/customer/coin_streams';//亲币流水
+var signList = baseUrl + 'home/customer/sign_list';//打标记录
+var rechargeCoin = baseUrl + 'home/customer/recharge_coin';//充值亲币
+var rechargeVip = baseUrl + 'home/customer/recharge_vip';//充值vip
+
+
+
+
+

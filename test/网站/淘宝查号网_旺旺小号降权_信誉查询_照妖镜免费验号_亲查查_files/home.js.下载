@@ -1,0 +1,30 @@
+var _this = null;
+window.onload = function () {
+    var vm = new Vue({
+        el: '.main-home-search',
+        data: function () {
+            return {
+                keyword: '',//输入内容
+            }
+        },
+        methods: {
+            searchWangWang: function () {
+                if (isNull(_this.keyword)) {
+                    layer.msg('请输入旺旺号')
+                    return
+                }
+                window.location.href = '/qcc_' + _this.keyword + '.html'
+            },
+            signWangWang: function () {
+
+            }
+        },
+        created: function () {
+            _this = this;
+        },
+        mounted: function () {
+
+        },
+    });
+
+}

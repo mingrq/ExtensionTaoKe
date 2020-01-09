@@ -1,0 +1,42 @@
+var show = false;
+$('.header-view-block').click(function () {
+    if (show) {
+        $('.header-view-block-left').width(0);
+        $('.header-view-block-right').width(20);
+        $('.header-view-block').css('background', '#DDDDDD')
+        show = false
+    } else {
+        $('.header-view-block-left').width(20);
+        $('.header-view-block-right').width(0);
+        $('.header-view-block').css('background', '#FF8800')
+        show = true
+    }
+})
+
+//登录
+function sumbitLogin() {
+    layer.open({
+        skin: 'qcc_layer_login',
+        type: 2, //Page层类型
+        area: ['400px', '472px'],
+        title: '',
+        shade: 0.2,//遮罩透明度
+        maxmin: false, //允许全屏最小化
+        shadeClose: true,
+        closeBtn: 0,
+        anim: -1,//0-6的动画形式，-1不开启
+        content: [loginView, 'no'],
+        yes: function () {
+            location.href = homeView;
+        }
+    });
+}
+
+function headerSearchWangWang(_id) {
+    let keyword = $('#' + _id).val();
+    if (isNull(keyword)) {
+        layer.msg('请输入旺旺号')
+        return
+    }
+    window.location.href = '/qcc_' + keyword + '.html';
+}
