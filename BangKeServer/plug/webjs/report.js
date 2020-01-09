@@ -16,8 +16,7 @@ if (m_errorww_isCc) {
 //服务器代码
 else {
     if (m_errorww_href && m_errorww_href == m_errorww_top_Href) {
-        let err_baseUrl = 'https://www.qinchacha.com/'; //网络请求测试地址
-        //let err_baseUrl = 'http://192.168.0.111:7001/'; //网络请求测试地址
+        let err_baseUrl = baseServerUrl; //网络请求地址
         let saveuploadingkey = 'm_plug_uploading';
         let ismystart = false;//判断是否当前页启动的自动上传旺旺
 

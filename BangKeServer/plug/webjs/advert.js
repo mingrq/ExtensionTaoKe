@@ -30,7 +30,7 @@ else {
             advert_ckick: baseUrl + 'advert/index/click',
         }
 
-        var billhtml = '<div id="jcz_qinchacha-advert-div"\n' +
+        var billhtml = '<div id="m-advert-div"\n' +
             '     style="width: 100%;height: 0px;align-items: center;position: relative; display: none ;cursor: pointer>\n' +
             '    <a href=""\n' +
             '       class="m_plug_adv_herf"\n' +
@@ -38,7 +38,7 @@ else {
             '       target="_blank"\n' +
             '       adv_id="">\n' +
             '        <div style="height: 100%;background-size: cover ;background:  no-repeat center center;cursor: pointer"></div>\n' +
-            '    </a><span class="jcz_qinchacha-advert-close"\n' +
+            '    </a><span class="m-advert-close"\n' +
             '              style="position: absolute;width: 20px;height: 20px;    line-height: 20px;color: #ffffff;cursor: pointer;top: 15px;right: 30px;    ;background: #666;text-align: center">X</span>' +
             '</div>\n'
 
@@ -48,7 +48,7 @@ else {
 
 
                 //关闭广告则不执行定时间任务
-                if ($('#jcz_qinchacha-advert-div').length == 0) {
+                if ($('#m-advert-div').length == 0) {
                     return;
                 }
                 if ((Date.now() - m_last_refresh_time) < 10000) {
@@ -86,11 +86,11 @@ else {
                         $('.m_plug_adv_herf').attr('stalls_id', data.data.stalls_id)
                         $('.m_plug_adv_herf').attr('image_id', data.data.image_id)
                         $('.m_plug_adv_herf div').css('background', 'url(' + data.data.image + ') center center')
-                        $('#jcz_qinchacha-advert-div').click(function () {
+                        $('#m-advert-div').click(function () {
                             advert_utils.clickBill();
                         })
-                        $('.jcz_qinchacha-advert-close').click(function (oEvent) {
-                            $('#jcz_qinchacha-advert-div').remove();
+                        $('.m-advert-close').click(function (oEvent) {
+                            $('#m-advert-div').remove();
                             oEvent.cancelBubble = true;
                             oEvent.stopPropagation();
                         })
@@ -132,7 +132,7 @@ else {
             },
         }
         //请求广告数据
-        $('#jcz_qinchacha-advert-div').remove();
+        $('#m-advert-div').remove();
         $('body').prepend(billhtml);
         m_last_mouse_move_time = Date.now();
         $(document).mousemove(function (event) {

@@ -373,7 +373,7 @@ if (m_sold_item_href == m_sold_item_topHref) {
                                         "            flex-direction: row;\n" +
                                         "            align-items: center;\n" +
                                         "            justify-content: center;\">\n" +
-                                        "        <img class=\"m_header_img_qcc\"\n" +
+                                        "        <img class=\"m_header_img_m\"\n" +
                                         "             src=\"" + photourl + "logo.png\" style=\" width: 77px;\n" +
                                         "            height: 22px;\"/>\n" +
                                         "    </div>\n" +
@@ -567,7 +567,7 @@ if (m_sold_item_href == m_sold_item_topHref) {
                 let order_img = parents.find("a[class^='production-mod__pic___']a").find('img')[0].src;
                 let order_title = parents.find("td[class^='sol-mod__no-br___']").find('div').eq(2).find('a').eq(0).text();
                 sold_list_utils.openSearchwwDialog(3, wangwang, order_num, create_time, paynum, order_img, order_title);
-            })
+            });
 
             //设置点击事件
             //使用了淘客

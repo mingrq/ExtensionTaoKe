@@ -19,12 +19,11 @@ if (m_dialog_isCc) {
 //服务器代码
 else {
     if (m_dialog_href && m_dialog_href == m_dialog_topHref) {
-        let dialogbaseUrl = 'https://www.qinchacha.com/'; //网络请求正式地址
-        //let dialogbaseUrl = 'http://192.168.0.111:7001/'; //网络请求正式地址
+        let dialogbaseUrl = baseServerUrl; //网络请求地址
         let dialogUrl = {
             red_dot: dialogbaseUrl + 'plug/buyer/red_dot',
             reputation: dialogbaseUrl + 'plug/buyer/reputation',
-            buyer_drops: dialogbaseUrl + 'plug/buyer/drops/',//'降权记录',
+            buyer_drops: dialogbaseUrl + 'plug/buyer/drops/',//降权记录
             wangwang_info: dialogbaseUrl + 'plug/buyer/wangwang_info',
             complaints: dialogbaseUrl + 'plug/buyer/complaints',
             advert: dialogbaseUrl + 'advert/index/advert',
@@ -61,7 +60,7 @@ else {
         var righttwogg = null;
 
         var m_dialog_html = `
-                            <!--浮出-->
+                            <!--Dialog-->
                         <div class="m_float">
                         <style>
                                 input:-webkit-autofill {
@@ -413,7 +412,7 @@ else {
                                     display: block;
                                 }
                                 
-                                .jqc_qcc_tbinfo_left{
+                                .m_tbinfo_left{
                                     height: 42px;
                                     color: #99A2A8;
                                     flex: 2;
@@ -422,7 +421,7 @@ else {
                                     justify-content: center;
                                     border-right: solid 1px #F2F9FC;
                                 }
-                                .jqc_qcc_tbinfo_right{
+                                .m_tbinfo_right{
                                     height: 42px;
                                     color: #333333;
                                     flex: 5;
@@ -464,7 +463,7 @@ else {
                                     <div v-show="isshow" id="m_float_right_login_box" class="m_float_right_login_box">
                                          <div style="width: 436px;height: 315px;background-color: #fff;border-radius: 5px;display: flex;flex-direction: column;z-index: 9999">
                                             <div style="padding: 31px">
-                                                <img style="width: 114px;height: 50px;" :src="getServerurl('right_one_qcc_logo.png')"/>
+                                                <img style="width: 114px;height: 50px;" :src="getServerurl('right_one_logo.png')"/>
                                                 <div style="width: 100%;display: flex;flex-direction: row;align-items: center;height: 40px;margin-top: 26px;border:1px solid #E6E6E6;border-radius: 2px;">
                                                     <img :src="getServerurl('username.png')" style="width: 13px;height: 15px;margin-left: 14px;margin-right: 14px">
                                                     <input style="flex: 1; -webkit-box-shadow: 0 0 0px 1000px white inset;" v-model="phone"  oninput="value=value.replace(/[^\\d]/g,'')"  placeholder="请输入手机号码"  >
@@ -528,7 +527,7 @@ else {
                                                 <!--标题-->
                                                 <div style="width: 125px;display: flex;flex-direction: column;border-right: solid 1px #E6E6E6;">
                                                     <div style="border-bottom: solid 1px #E6E6E6;display: flex;align-items: center;justify-content: center;flex: 1;background-color: #fff">
-                                                       <img style="width: 89px;height: 18px" :src="getServerurl('qcc_dialog_bjfx.png')">
+                                                       <img style="width: 89px;height: 18px" :src="getServerurl('dialog_bjfx.png')">
                                                     </div>
                                                     <div class="m_one_list_ky" >
                                                         可疑
@@ -584,7 +583,7 @@ else {
                                                 <!--标题-->
                                                 <div style="width: 125px;height: 130px;display: flex;flex-direction: column;border-right: solid 1px #E6E6E6;">
                                                     <div style="border-bottom: solid 1px #E6E6E6;display: flex;align-items: center;justify-content: center;flex: 1;background-color: #fff">
-                                                       <img style="width: 89px;height: 18px" :src="getServerurl('qcc_dialog_bjfx.png')">
+                                                       <img style="width: 89px;height: 18px" :src="getServerurl('dialog_bjfx.png')">
                                                     </div>
                                                     <div class="m_one_list_ky" >
                                                         可疑
@@ -633,26 +632,26 @@ else {
                                             <div style="display: flex;flex-direction: row;border: solid 1px #E6E6E6;margin-top: 10px">
                                                 <div style="display: flex;flex-direction: column;flex: 1">
                                                     <div class="m_float_right_one_right_item">
-                                                        <span class="jqc_qcc_tbinfo_left">买家旺旺</span>
-                                                        <span class="jqc_qcc_tbinfo_right" style="color: #333">{{wangwang}}</span>
-                                                        <span class="jqc_qcc_tbinfo_left">买家信誉</span>
-                                                        <span class="jqc_qcc_tbinfo_right" style="color: #333"><img :src="reputationimg"></span>
-                                                        <span class="jqc_qcc_tbinfo_left">是否商家</span>
-                                                        <span class="jqc_qcc_tbinfo_right" style="border: 0px;">
+                                                        <span class="m_tbinfo_left">买家旺旺</span>
+                                                        <span class="m_tbinfo_right" style="color: #333">{{wangwang}}</span>
+                                                        <span class="m_tbinfo_left">买家信誉</span>
+                                                        <span class="m_tbinfo_right" style="color: #333"><img :src="reputationimg"></span>
+                                                        <span class="m_tbinfo_left">是否商家</span>
+                                                        <span class="m_tbinfo_right" style="border: 0px;">
                                                           <span v-if="is_seller==0" style="color: #333">非</span>
                                                           <span v-if="is_seller >0" style="color: #333">是</span>
                                                         </span>
                                                     </div>
                                                     <div class="m_float_right_one_right_item ">
-                                                        <span class="m_one_list_ky jqc_qcc_tbinfo_left" style="border-bottom: 0px" >
+                                                        <span class="m_one_list_ky m_tbinfo_left" style="border-bottom: 0px" >
                                                         好评率
                                                         <img :src="getServerurl('newwen.png')" style="width: 11px;height: 11px;position: absolute; right: 3px;top: 3px;">
                                                              <div class="m_one_list_kyms" style="left:45px;">
                                                                 <span style="font-size: 12px; font-weight: bold; color: #ff0000;margin-right: 5px">好评率：</span>商家给买家的好评率。
                                                              </div>
                                                         </span>
-                                                        <span class="jqc_qcc_tbinfo_right" style="color: #333">{{positive_ratio}}%</span>
-                                                        <span class="m_one_list_ky jqc_qcc_tbinfo_left" style="border-bottom: 0px" >
+                                                        <span class="m_tbinfo_right" style="color: #333">{{positive_ratio}}%</span>
+                                                        <span class="m_one_list_ky m_tbinfo_left" style="border-bottom: 0px" >
                                                         周平均
                                                         <img :src="getServerurl('newwen.png')" style="width: 11px;height: 11px;position: absolute; right: 3px;top: 3px;">
                                                              <div class="m_one_list_kyms" style="left:75px;z-index: 99">
@@ -660,19 +659,19 @@ else {
                                                              买家从注册至今平均每周增加的信誉，可参考为购物频率。
                                                              </div>
                                                         </span>
-                                                        <span class="jqc_qcc_tbinfo_right" style="color: #333">{{zhoupingjun}}</span>
-                                                          <span class="m_one_list_ky jqc_qcc_tbinfo_left" style="border-bottom: 0px" >
+                                                        <span class="m_tbinfo_right" style="color: #333">{{zhoupingjun}}</span>
+                                                          <span class="m_one_list_ky m_tbinfo_left" style="border-bottom: 0px" >
                                                         月平均
                                                         <img :src="getServerurl('newwen.png')" style="width: 11px;height: 11px;position: absolute; right: 3px;top: 3px;">
                                                              <div class="m_one_list_kyms" style="left:75px;">
                                                                  <span style="font-size: 12px; font-weight: bold; color: #ff0000;margin-right: 5px;width: 60px">月平均：</span>买家从注册至今平均每月增加的信誉，可参考为购物频率。
                                                              </div>
                                                         </span>
-                                                        <span class="jqc_qcc_tbinfo_right" style="border: 0px;color:#333">{{yuepingjun}}</span>
+                                                        <span class="m_tbinfo_right" style="border: 0px;color:#333">{{yuepingjun}}</span>
                                                     </div>
                                                     <div class="m_float_right_one_right_item">
-                                                        <span class="jqc_qcc_tbinfo_left">性别</span>
-                                                        <span class="jqc_qcc_tbinfo_right">
+                                                        <span class="m_tbinfo_left">性别</span>
+                                                        <span class="m_tbinfo_right">
                                                         <span v-if="sex == 0"><img
                                                                     :src="getServerurl('boy.png')"
                                                                     style="width: 14px;height: 14px"></span>
@@ -680,30 +679,30 @@ else {
                                                                     :src="getServerurl('gril.png')"
                                                                     style="width: 14px;height: 14px"></span>
                                                         </span>
-                                                        <span class="jqc_qcc_tbinfo_left">实名认证</span>
-                                                        <span class="jqc_qcc_tbinfo_right">
+                                                        <span class="m_tbinfo_left">实名认证</span>
+                                                        <span class="m_tbinfo_right">
                                                             <div v-show="auth_info" style="padding: 4px 7px;margin-left: 10px; border-radius: 2px;background-color: rgba(193, 234, 255, 1);;color: rgba(0, 136, 255, 1);">
                                                                 {{auth_info}}
                                                             </div>
                                                             <div v-else>未实名认证</div>
                                                         </span>
-                                                        <span class="jqc_qcc_tbinfo_left">账号等级</span>
-                                                        <span class="jqc_qcc_tbinfo_right" style="border: 0px;color: #333">
+                                                        <span class="m_tbinfo_left">账号等级</span>
+                                                        <span class="m_tbinfo_right" style="border: 0px;color: #333">
                                                              <div v-show="tb_level" style="padding: 4px 7px;border-radius: 2px;background-color: #FFE4E4;color: #FF0000">
                                                                     {{tb_level}}
                                                              </div>
                                                          </span>
                                                     </div>
                                                       <div class="m_float_right_one_right_item" style="border-bottom: 0px">
-                                                        <span class="jqc_qcc_tbinfo_left">地区</span>
-                                                        <span class="jqc_qcc_tbinfo_right">
+                                                        <span class="m_tbinfo_left">地区</span>
+                                                        <span class="m_tbinfo_right">
                                                           <span v-if="area" style="color: #333">{{area}}</span>
                                                           <span v-else style="color: #333">保密</span>
                                                         </span>
-                                                        <span class="jqc_qcc_tbinfo_left">注册日期</span>
-                                                        <span class="jqc_qcc_tbinfo_right" style="color: #333">{{toDate(regist_time,'yyyy-MM-dd')}}</span>
-                                                        <span class="jqc_qcc_tbinfo_left">淘龄</span>
-                                                        <span class="jqc_qcc_tbinfo_right" style="border: 0px;color: #333">{{getRigistday()}}天</span>
+                                                        <span class="m_tbinfo_left">注册日期</span>
+                                                        <span class="m_tbinfo_right" style="color: #333">{{toDate(regist_time,'yyyy-MM-dd')}}</span>
+                                                        <span class="m_tbinfo_left">淘龄</span>
+                                                        <span class="m_tbinfo_right" style="border: 0px;color: #333">{{getRigistday()}}天</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -728,8 +727,8 @@ else {
                                         <div style="width: 100%;padding: 16px;display: flex;flex-direction: column">
                                             <!--头部-->
                                             <div style="width: 100%;display: flex;flex-direction: row;align-items: center;font-size: 12px">
-                                                <span style="flex: 1;color: #333333">批量查询需要5亲币/订单</span>
-                                                <span style="color: #333333">亲币：</span>
+                                                <span style="flex: 1;color: #333333">批量查询需要5金币/订单</span>
+                                                <span style="color: #333333">金币：</span>
                                                 <span style="color: #FF0900;margin-left: 5px;margin-right: 10px">{{coin}}</span>
                                                <span @click="jumCz()" style="cursor: pointer; color: #0088FF;">充值</span>
                                             </div>
@@ -951,7 +950,7 @@ else {
                                         </div>
                                     </div>
                                     <!--免费获币内容-->
-                                    <div v-show="isshow" id="m_float_right_five_box" class="m_float_right_five_box">
+                                    <div v-show="isshow" id="m_float_right_five_box" class="m_float_right_five_box" display="none">
                                         <div style="width: 100%;height: 100%;padding: 16px;display: flex;flex-direction: column;">
                                              <!--分享助力-->
                                              <div style="display: flex;flex-direction: row;align-items: center;">
@@ -1057,7 +1056,7 @@ else {
             },
             //获取服务器地址方便后期改
             getServerurl: function (url) {
-                return dialogbaseUrl + 'assets/plug/' + url
+                return dialogbaseUrl + 'app/public/assets/plug/' + url
             },
             //获取本地存储的旺旺
             getLocalSearchWW: function () {
@@ -1380,9 +1379,9 @@ else {
                         rediolist: [
                             {text: '查信誉', leftsize: 0},
                             {text: '查淘客', leftsize: 0},
-                            {text: '评论吐槽', leftsize: 0},
+                            /*{text: '评论吐槽', leftsize: 0},*/
                             {text: '标记TA', leftsize: 0},
-                            {text: '免费获币', leftsize: 0},
+                            /*{text: '免费获币', leftsize: 0},*/
                         ],
                     },
                     methods: {
@@ -1394,9 +1393,9 @@ else {
                             if (rightTwo) {
                                 rightTwo.isshow = false;
                             }
-                            if (rightThree) {
+                            /*if (rightThree) {
                                 rightThree.isshow = false;
-                            }
+                            }*/
                             if (rightFour) {
                                 rightFour.isshow = false;
                             }
@@ -1441,14 +1440,14 @@ else {
                                         }
                                     }
                                     break
-                                case 2:
+                                /*case 2:
                                     rightThree.isshow = true;
                                     if (rightThree.tc_list.length == 0) {
                                         rightThree.initData(rightThree.page);
                                     }
                                     rightlogin.isshow = false
-                                    break
-                                case 3:
+                                    break;*/
+                                case 2:
                                     rightFour.isshow = true;
                                     if (uid == 0 || !uid) {
                                         rightlogin.isshow = true;
