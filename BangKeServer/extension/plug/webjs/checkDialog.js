@@ -21,25 +21,25 @@ else {
     if (m_dialog_href && m_dialog_href == m_dialog_topHref) {
         let dialogbaseUrl = baseServerUrl; //网络请求地址
         let dialogUrl = {
-            red_dot: dialogbaseUrl + 'extension/plug/buyer/red_dot',
-            reputation: dialogbaseUrl + 'extension/plug/buyer/reputation',
-            buyer_drops: dialogbaseUrl + 'extension/plug/buyer/drops/',//降权记录
-            wangwang_info: dialogbaseUrl + 'extension/plug/buyer/wangwang_info',
-            complaints: dialogbaseUrl + 'extension/plug/buyer/complaints',
-            advert: dialogbaseUrl + 'extension/advert/index/advert',
-            complaint: dialogbaseUrl + 'extension/plug/buyer/complaint',
-            login: dialogbaseUrl + 'extension/plug/index/login',
-            isSBupload: dialogbaseUrl + 'upload',
-            sign: dialogbaseUrl + 'extension/plug/buyer/sign',
-            sign_info: dialogbaseUrl + 'extension/plug/buyer/sign_info',
-            user_info: dialogbaseUrl + 'extension/plug/index/info',
-            tbk_info: dialogbaseUrl + 'extension/plug/buyer/tbk_info',
-            tbk_img: dialogbaseUrl + 'extension/plug/buyer/tbk_img',
-            share: dialogbaseUrl + 'extension/plug/buyer/share',
-            upload: dialogbaseUrl + 'extension/upload',
-            active_qrcode: dialogbaseUrl + 'extension/plug/buyer/active_qrcode',
-            advert_ckick: dialogbaseUrl + 'extension/advert/index/click',
-            collection_phone: dialogbaseUrl + 'extension/plug/buyer/collection_phone',
+            red_dot: dialogbaseUrl + 'extension/plug/buyer/red_dot.php',
+            reputation: dialogbaseUrl + 'extension/plug/buyer/reputation.php',
+            buyer_drops: dialogbaseUrl + 'extension/plug/buyer/drops.php',//降权记录
+            wangwang_info: dialogbaseUrl + 'extension/plug/buyer/wangwang_info.php',
+            complaints: dialogbaseUrl + 'extension/plug/buyer/complaints.php',
+            advert: dialogbaseUrl + 'extension/advert/index/advert.php',
+            complaint: dialogbaseUrl + 'extension/plug/buyer/complaint.php',
+            login: dialogbaseUrl + 'extension/plug/index/login.php',
+            isSBupload: dialogbaseUrl + 'extension/upload.php',
+            sign: dialogbaseUrl + 'extension/plug/buyer/sign.php',
+            sign_info: dialogbaseUrl + 'extension/plug/buyer/sign_info.php',
+            user_info: dialogbaseUrl + 'extension/plug/index/info.php',
+            tbk_info: dialogbaseUrl + 'extension/plug/buyer/tbk_info.php',
+            tbk_img: dialogbaseUrl + 'extension/plug/buyer/tbk_img.php',
+            share: dialogbaseUrl + 'extension/plug/buyer/share.php',
+            upload: dialogbaseUrl + 'extension/upload.php',
+            active_qrcode: dialogbaseUrl + 'extension/plug/buyer/active_qrcode.php',
+            advert_ckick: dialogbaseUrl + 'extension/advert/index/click.php',
+            collection_phone: dialogbaseUrl + 'extension/plug/buyer/collection_phone.php',
         };
 
         let dialog_seller_wangwang = '';

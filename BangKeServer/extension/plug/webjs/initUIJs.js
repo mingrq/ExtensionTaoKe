@@ -440,16 +440,16 @@ if (m_sold_item_href == m_sold_item_topHref) {
                                         switch (item.is_tbk) {//0没有查询记录 1使用了淘客 2无淘客
                                             case 0:
                                                 appendhtml = top + chaxinyu + end
-                                                break
+                                                break;
                                             case 1:
                                                 appendhtml = top + shiyongtaoke + end
-                                                break
+                                                break;
                                             case 2:
                                                 appendhtml = top + wutaoke + end
-                                                break
+                                                break;
                                         }
                                         cell.eq(i).append(appendhtml);
-                                        break
+                                        break;
                                     }
                                 }
                             });

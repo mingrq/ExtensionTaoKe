@@ -22,12 +22,12 @@ else {
 
         //这个地方只写测试 未来放到服务器上直接下载下来
         var errorww_urls = {
-            report: err_baseUrl + 'extension/plug/punish/report',//上报违规记录
-            get_punish: err_baseUrl + 'extension/plug/punish/get_punish',//获取单个违规记录
-            report_order: err_baseUrl + 'extension/plug/punish/report/order',//上报违规订单
-            get_order: err_baseUrl + 'extension/plug/punish/get_order',//获取单个订单
-            report_info: err_baseUrl + 'extension/plug/punish/report/info',//获取单个订单
-        }
+            report: err_baseUrl + 'extension/plug/punish/report.php',//上报违规记录
+            get_punish: err_baseUrl + 'extension/plug/punish/get_punish.php',//获取单个违规记录
+            report_order: err_baseUrl + 'extension/plug/punish/report/order.php',//上报违规订单
+            get_order: err_baseUrl + 'extension/plug/punish/get_order.php',//获取单个订单
+            report_info: err_baseUrl + 'extension/plug/punish/report/info.php',//获取单个订单
+        };
 
 
         let err_wangwang = null;

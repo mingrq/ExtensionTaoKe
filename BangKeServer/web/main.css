@@ -1,0 +1,240 @@
+html {
+    width: 100%;
+    display: flex;
+}
+
+.main {
+    min-width: 1200px;
+    width: 1200px;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+
+.nav-position {
+    flex: 1;
+    position: relative;
+}
+
+.nav-left {
+    z-index: 0;
+    height: 100%;
+    width: 200px;
+    min-width: 200px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    background: #fff;
+}
+
+.nav-left-view {
+    margin-top: 16px;
+    width: 100%;
+}
+
+.nav-left-nav {
+    margin-top: 20px;
+    height: 50px;
+    border-left: 4px solid #fff;
+}
+
+.nav-left-nav:hover {
+    border-color: red;
+    background: #FFF7F7;
+}
+
+.nav-left-nav:hover div {
+}
+
+.nav-left-nav-select {
+    border-color: red;
+    background: #FFF7F7;
+}
+
+.nav-left-nav-select div {
+    font-weight: bold;
+}
+
+.nav-left-nav-icon {
+    margin-left: 30px;
+    width: 18px;
+    height: 18px;
+}
+
+.nav-left-nav-title {
+    color: #000000;
+    font-size: 14px;
+    margin-left: 30px;
+}
+
+.nav-right {
+    flex: 1;
+    min-width: 1400px;
+    background: transparent;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.nav-right-view {
+    margin: 36px;
+    flex: 1;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.nav-right-solid {
+    margin-top: 20px;
+    height: 1px;
+    width: 100%;
+    background: #F8F8F8;
+}
+
+.nav-right-title {
+    color: #000000;
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 25px;
+}
+
+.nav-right-title-solid {
+    background: #FF0000;
+    margin-right: 35px;
+    width: 5px;
+    height: 25px;
+}
+
+.nav-right-data {
+    padding-top: 30px;
+    padding-left: 50px;
+}
+
+.about-button {
+    background: #4B85E6;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 0px 5px;
+    min-width: 50px;
+    font-size: 12px;
+    color: white;
+}
+
+.about-input {
+    height: 28px;
+    line-height: 28px;
+    font-size: 14px;
+    color: #000;
+}
+
+.about-input-num {
+    width: 40px;
+    padding: 0px 5px;
+    margin-right: 10px;
+}
+
+.about-input-text {
+    min-width: 300px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 2px solid #eee;
+    padding: 0px 5px;
+}
+
+.about-input-key {
+    border: 1px #e5e5e5 solid;
+    border-radius: 5px;
+    width: 90px;
+    height: 20px;
+    line-height: 20px;
+    padding: 2px 5px;
+    font-size: 12px;
+}
+
+.about-input-text:focus {
+    border-bottom: 2px solid #4B85E6;
+}
+
+.about-input::-webkit-input-placeholder {
+    color: #cccccc;
+    font-size: 12px;
+}
+
+.about-input:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18*/
+    color: #cccccc;
+    font-size: 12px;
+}
+
+.about-input::-moz-placeholder {
+    /* Mozilla Firefox 19+*/
+    color: #cccccc;
+    font-size: 12px;
+}
+
+.about-input:-ms-input-placeholder {
+    /* Internet Explorer 10+*/
+    color: #cccccc;
+    font-size: 12px;
+}
+
+.float-scroll-back {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    background: rgba(0, 0, 0, 0.37);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.about-hover-div {
+    position: relative;
+    margin-left: 20px;
+    width: 14px;
+    height: 14px;
+    max-width: 14px;
+    min-width: 14px;
+    cursor: pointer;
+}
+
+.about-hover-icon {
+    width: 14px;
+    height: 14px;
+    max-width: 14px;
+    min-width: 14px;
+}
+
+.about-hover-show {
+    display: none;
+    position: absolute;
+    text-align: left;
+    top: 20px;
+    left: 4px;
+    padding: 5px 10px;
+    min-width: 300px;
+    border: 1px solid rgba(230, 230, 230, 1);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    border-radius: 2px;
+    background: #fff;
+    color: #333;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: normal;
+    z-index: 9;
+}
+
+.about-hover-div:hover .about-hover-show {
+    display: block;
+}
+
+.qcc_layer_login {
+    border-radius: 20px !important;
+}
+
+flex {
+    flex: 1
+}
