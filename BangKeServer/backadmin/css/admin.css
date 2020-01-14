@@ -230,6 +230,7 @@ ul, li {
 .input-help {
     float: left;
     line-height: 30px;
+    margin: -5px;
 }
 
 .input-help li {
