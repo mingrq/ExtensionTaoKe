@@ -63,6 +63,5 @@ header('content-type:image/png');
 //显示图片
 imagepng($image);
 
-
 //destory
 imagedestroy($image);
