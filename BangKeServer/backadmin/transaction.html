@@ -39,20 +39,13 @@
     </li>
      <li class="Info">
      <span class="symbol  blue"><i class="fa fa-shopping-cart"></i></span>
-     <span class="value"><h4>订单数量</h4><p class="Quantity color_red">5656</p></span>
+     <span class="value"><h4>充值次数</h4><p class="Quantity color_red">5656</p></span>
     </li>
      <li class="Info">
-     <span class="symbol terques"><i class="fa fa-shopping-cart"></i></span>
-     <span class="value"><h4>交易成功</h4><p class="Quantity color_red">34565</p></span>
+     <span class="symbol yellow"><i class="fa icon-user"></i></span>
+     <span class="value"><h4>充值人数</h4><p class="Quantity color_red">34565</p></span>
     </li>
-     <li class="Info">
-     <span class="symbol yellow"><i class="fa fa-shopping-cart"></i></span>
-     <span class="value"><h4>交易失败</h4><p class="Quantity color_red">34</p></span>
-    </li>
-     <li class="Info">
-     <span class="symbol darkblue"><i class="fa fa-jpy"></i></span>
-     <span class="value"><h4>退款金额</h4><p class="Quantity color_red">3441.68</p></span>
-    </li>
+
    </ul>
  
  </div>
@@ -96,7 +89,7 @@
         trigger: 'axis'
     },
     legend: {
-        data:['所有订单','待付款','已付款','代发货']
+        data:['交易金额','充值次数','充值人数']
     },
     toolbox: {
         show : true,
@@ -122,7 +115,7 @@
     ],
     series : [
         {
-            name:'所有订单',
+            name:'交易金额',
             type:'bar',
             data:[120, 49, 70, 232, 256, 767, 1356, 1622, 326, 200,164, 133],
             markPoint : {
@@ -133,7 +126,7 @@
             }           
         },
         {
-            name:'待付款',
+            name:'充值次数',
             type:'bar',
             data:[26, 59, 30, 84, 27, 77, 176, 1182, 487, 188, 60, 23],
             markPoint : {
@@ -146,7 +139,7 @@
 			
         }
 		, {
-            name:'已付款',
+            name:'充值人数',
             type:'bar',
             data:[26, 59, 60, 264, 287, 77, 176, 122, 247, 148, 60, 23],
             markPoint : {
@@ -155,19 +148,6 @@
                     {name : '年最低', value : 23, xAxis: 11, yAxis: 3}
                 ]
             },
-           
-		}
-		, {
-            name:'代发货',
-            type:'bar',
-            data:[26, 59, 80, 24, 87, 70, 175, 1072, 48, 18, 69, 63],
-            markPoint : {
-                data : [
-                    {name : '年最高', value : 1072, xAxis: 7, yAxis: 1072, symbolSize:18},
-                    {name : '年最低', value : 22, xAxis: 11, yAxis: 3}
-                ]
-            },
-           
 		}
     ]
 };
