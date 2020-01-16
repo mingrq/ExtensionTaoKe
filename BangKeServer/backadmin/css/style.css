@@ -1133,7 +1133,6 @@ body {
 }
 
 .formControls {
-    float: left;
     width: 250px;
     margin-left: 10px;
 }
@@ -1183,7 +1182,6 @@ body {
 #add_picture .page_right_style {
     overflow: auto;
     position: fixed;
-    left: 220px;
 }
 
 #add_picture .page_right_style.Widescreen {
@@ -1191,7 +1189,9 @@ body {
 }
 
 #form-article-add {
-    padding: 20px 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 10px;
 }
 
 #form-article-add .cl {
@@ -1228,7 +1228,6 @@ body {
     width: auto;
     margin-left: 20px;
     top: 0px;
-    float: left
 }
 
 #form-article-add .formControls.col-10 {
